@@ -12,87 +12,100 @@
     </head>
 
     <body>
-        <nav>
-            <a class="li a" href="index.html">Главная</a>
-            <a class="li a" href="student.html">Досье студента</a>
-            <a class="li a" href="student_form.html">Изменение/добавление досье</a>
-        </nav>
-        <br>
-        <header>
-            <h2>
-            Форма записи
-        </h2>
-        </header>
-
         <main>
-            <form>
-                <label>ФИО студента:</label>
-                <input 
-                type="text"
-                placeholder="Введите ФИО"
-                required
-                >
+            <div>
+                <nav>
+                    <a class="li a" href="index.html">Главная</a>
+                    <a class="li a" href="student.html">Досье студента</a>
+                    <a class="li a" href="student_form.html">Изменение/добавление досье</a>
+                </nav>
+            </div>
 
-                <br>
+            <div>
+                <header>
+                    <h1>
+                        Форма записи
+                    </h1>
+                </header>
+            </div>
+            <div>
+                <form id="UsersForm">
+                    <label for="full-name">ФИО студента:</label>
+                    <input
+                    id="full-name" 
+                    type="text"
+                    placeholder="Введите ФИО"
+                    required
+                    >
 
-                <label>Группа:</label>
-                <input 
-                type="text"
-                placeholder="Введите группу"
-                required
-                >
+                    <br>
 
-                <br>
+                    <label for="group">Группа:</label>
+                    <input 
+                    id="group"
+                    type="text"
+                    placeholder="Введите группу"
+                    required
+                    >
 
-                <label>ИСУ id:</label>
-                <input 
-                type="number"
-                placeholder="ИСУ id"
-                required
-                >
+                    <br>
 
-                <br>
+                    <label for="ISU">ИСУ id:</label>
+                    <input 
+                    id="ISU"
+                    type="number"
+                    placeholder="ИСУ id"
+                    required
+                    >
 
-                <label>номер общежития:</label>
-                <input 
-                type="number"
-                placeholder="Введите номер общежития"
-                required
-                >
+                    <br>
 
-                <br>
+                    <label for="number-house">Номер общежития:</label>
+                    <input 
+                    id="number-room"
+                    type="number"
+                    placeholder="Введите номер общежития"
+                    required
+                    >
 
-                <label>комната:</label>
-                <input 
-                type="number"
-                placeholder="Введите номер комнаты"
-                required
-                >
+                    <br>
 
-                <br>
+                    <label for="number-room">Комната:</label>
+                    <input 
+                    id="number-room"
+                    type="number"
+                    placeholder="Введите номер комнаты"
+                    required
+                    >
 
-                <label>срок заселения:</label>
-                <input 
-                type="date"
-                placeholder="Введите срок заселения"
-                required
-                >
+                    <br>
 
-                <br>
+                    <label for="date">Срок заселения:</label>
+                    <input 
+                    id="date"
+                    type="date"
+                    placeholder="Введите срок заселения"
+                    required
+                    >
 
-                <label>Является ли студент иностранцем?</label>
-                <input 
-                type="checkbox"
-                >
+                    <br>
 
-                <br>
+                    <label for="inostran">Является ли студент иностранцем?</label>
+                    <input 
+                    id="inostran"
+                    type="checkbox"
+                    >
 
-                <label>Заметки</label>
-                <textarea>
-                    Введите описание
-                </textarea>
-                >
-            </form>
+                    <br>
+
+                    <label for="note">Заметки</label>
+                    <textarea
+                        id="note"
+                        placeholder="Введите описание">
+                    </textarea>
+                    >
+                </form>
+            </div>
         </main>
         <footer>
             <p>Сайтик</p>

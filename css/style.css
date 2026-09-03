@@ -11,7 +11,19 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 10px;
+    font-size: 20px;
+}
+
+.container-button {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 15px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
 }
 
 .table {
@@ -21,11 +33,12 @@
     border: 2px solid black;
 }
 
-.th,
+th,
 td {
   border: 1px solid #000000; 
   padding: 8px;             
   text-align: left;
+  font-size: 20px;
 }
 
 .li {
@@ -36,4 +49,22 @@ td {
   display: block;
   padding: 8px;
   background-color: #dddddd;
+}
+
+div {
+    display: flex;
+    margin: 20px;
+}
+
+.container-div {
+    flex-direction: column;
+    margin: 20px;
+    gap: 10px; 
+}
+
+.form {
+  flex-direction: column;
+  padding: 8px;
+  font-size: 20px;
+  
 }

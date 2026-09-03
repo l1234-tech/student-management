@@ -12,48 +12,56 @@
         </title>
     </head>
     <body>
-        <nav>
-            <a class="li a" href="index.html">Главная</a>
-            <a class="li a" href="student.html">Досье студента</a>
-            <a class="li a" href="student_form.html">Изменение/добавление досье</a>
-        </nav>
-        <br>
-        <header>
-            <h1 id="title">
-                Список студентов
-            </h1>
-        </header>
+        <div>
+            <nav>
+                <a class="li a" href="index.html">Главная</a>
+                <a class="li a" href="student.html">Досье студента</a>
+                <a class="li a" href="student_form.html">Изменение/добавление досье</a>
+            </nav>
+        </div>
+        <div>
+            <header>
+                <h1 id="title">
+                    Список студентов
+                </h1>
+            </header>
+        </div>
         <main>
-            <button class="button">
-                Добавить нового студента
-            </button>
-            <br>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th> ФИО студента </th>
-                        <th> группа </th>
-                        <th> ИСУ id </th>
-                        <th> номер общежития </th>
-                        <th> комната </th>
-                        <th> действия</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Сырчин Андрей Дмитриевич</td>
-                        <td>Р3222</td>
-                        <td>501965</td>
-                        <td>12</td>
-                        <td>1617</td>
-                        <td>
-                            <button class="button">Редактировать</button>
-                            <button class="button">Удалить</button>
-                            <button class="button">Подробная информация</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="container-div">
+                <button class="button">
+                    Добавить нового студента
+                </button>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> ФИО студента </th>
+                            <th> Группа </th>
+                            <th> ИСУ id </th>
+                            <th> Номер общежития </th>
+                            <th> Комната </th>
+                            <th> Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Сырчин Андрей Дмитриевич</td>
+                            <td>Р3222</td>
+                            <td>501965</td>
+                            <td>12</td>
+                            <td>1617</td>
+                            <td>
+                                <div class="container-div">
+                                    <button class="container-button">Редактировать</button>
+                                    <button class="container-button">Удалить</button>
+                                    <button class="container-button">Подробная информация</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
         </main>
 
