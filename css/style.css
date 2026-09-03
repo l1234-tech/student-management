@@ -1,0 +1,39 @@
+#title {
+    font-size: 32px;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 15px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+.th,
+td {
+  border: 1px solid #000000; 
+  padding: 8px;             
+  text-align: left;
+}
+
+.li {
+  float: left;
+}
+
+.a {
+  display: block;
+  padding: 8px;
+  background-color: #dddddd;
+}
