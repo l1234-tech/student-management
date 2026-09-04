@@ -29,7 +29,7 @@
                 </header>
             </div>
             <div>
-                <form id="UsersForm">
+                <form id="UserForm">
                     <label for="full-name">ФИО студента:</label>
                     <input
                     id="full-name" 
@@ -62,7 +62,7 @@
 
                     <label for="number-house">Номер общежития:</label>
                     <input 
-                    id="number-room"
+                    id="number-house"
                     type="number"
                     placeholder="Введите номер общежития"
                     required
@@ -103,12 +103,16 @@
                         id="note"
                         placeholder="Введите описание">
                     </textarea>
-                    >
+                    <br><br>
+                    <button type="submit">
+                        Подтвердить
+                    </button>
                 </form>
             </div>
         </main>
         <footer>
             <p>Сайтик</p>
         </footer>
+        <script src="js/student_form.js"></script>
     </body>
 </html>
