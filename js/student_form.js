@@ -31,13 +31,18 @@ form.addEventListener("submit", function(event) {
         const decodedData = decodeURIComponent(cookiesData);
 
         students = JSON.parse(decodedData);
-        students.push(user);
-        const data = encodeURIComponent(
-            JSON.stringify(students)
-        );
+        if (students.some(student => student.ISU === user.ISU)){
+            console.log("Такой пользователь уже есть!")
+        } else {
+            students.push(user);
+            const data = encodeURIComponent(
+                JSON.stringify(students)
+            );
 
-        document.cookie = `students=${data}`;
-        console.log(students);
+            document.cookie = `students=${data}`;
+            console.log(students);
+        }
+
     } else{
         students = [];
         students.push(user);

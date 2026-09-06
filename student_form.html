@@ -13,23 +13,20 @@
 
     <body>
         <main>
-            <div>
-                <nav>
-                    <a class="li a" href="index.html">Главная</a>
-                    <a class="li a" href="student.html">Досье студента</a>
-                    <a class="li a" href="student_form.html">Изменение/добавление досье</a>
+            <div class="nav-list">
+                <nav class="nav">
+                    <ul  class="nav-list">
+                        <a class="nav-link" href="index.html">Главная</a>
+                        <a class="nav-link" href="student.html">Досье студента</a>
+                        <a class="nav-link" href="student_form.html">Изменение/добавление досье</a>
+                    </ul>
                 </nav>
             </div>
-
-            <div>
-                <header>
-                    <h1>
-                        Форма записи
-                    </h1>
-                </header>
-            </div>
-            <div>
-                <form id="UserForm">
+            <form id="UserForm" class="main-form">
+                <h2>
+                    Форма записи
+                </h2>
+                <div class="form-group">
                     <label for="full-name">ФИО студента:</label>
                     <input
                     id="full-name" 
@@ -37,9 +34,8 @@
                     placeholder="Введите ФИО"
                     required
                     >
-
-                    <br>
-
+                </div>
+                <div class="form-group">
                     <label for="group">Группа:</label>
                     <input 
                     id="group"
@@ -47,39 +43,43 @@
                     placeholder="Введите группу"
                     required
                     >
-
-                    <br>
-
+                </div>
+                <div class="form-group">
                     <label for="ISU">ИСУ id:</label>
                     <input 
                     id="ISU"
+                    min="100_000"
+                    max="999_999"
                     type="number"
-                    placeholder="ИСУ id"
+                    placeholder="Введите ИСУ id"
                     required
                     >
+                </div>
 
-                    <br>
-
+                <div class="form-group">
                     <label for="number-house">Номер общежития:</label>
                     <input 
                     id="number-house"
+                    min="1"
+                    max="20"
                     type="number"
                     placeholder="Введите номер общежития"
                     required
                     >
+                </div>
 
-                    <br>
-
+                <div class="form-group">
                     <label for="number-room">Комната:</label>
                     <input 
                     id="number-room"
+                    min="1000"
+                    max="9999"
                     type="number"
                     placeholder="Введите номер комнаты"
                     required
                     >
-
-                    <br>
-
+                </div>
+                <div class="form-group">
                     <label for="date">Срок заселения:</label>
                     <input 
                     id="date"
@@ -87,31 +87,30 @@
                     placeholder="Введите срок заселения"
                     required
                     >
-
-                    <br>
-
+                </div>
+                <div class="form-group">
                     <label for="inostran">Является ли студент иностранцем?</label>
                     <input 
                     id="inostran"
                     type="checkbox"
                     >
-
-                    <br>
-
+                </div>
+                <div class="form-group">
                     <label for="note">Заметки</label>
                     <textarea
                         id="note"
                         placeholder="Введите описание">
                     </textarea>
-                    <br><br>
-                    <button type="submit">
-                        Подтвердить
-                    </button>
-                </form>
-            </div>
+                </div>
+                <button type="submit" class="submit-btn">
+                    Подтвердить
+                </button>
+            </form>
+            
+            
         </main>
-        <footer>
-            <p>Сайтик</p>
+        <footer class="site-footer">
+            Веб программирование 2026
         </footer>
         <script src="js/student_form.js"></script>
     </body>
