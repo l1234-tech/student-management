@@ -2,8 +2,8 @@
     font-size: 32px;
 }
 
-.button {
-    background-color: #007bff;
+.add-button {
+    background-color: #4eb24d;
     border: none;
     border-radius: 8px;
     color: white;
@@ -14,8 +14,32 @@
     font-size: 20px;
 }
 
+.edit-button {
+    background-color: #57a756;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 15px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
+
+.delete-button {
+  background-color: #ce5858;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 15px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
+
 .container-button {
-    background-color: #007bff;
+    background-color: #3a79bc;
     border: none;
     border-radius: 8px;
     color: white;
@@ -71,8 +95,8 @@ div {
 
 .main-form h2 {
   margin-bottom: 20px;
-  font-size: 22px;
-  color: #333;
+  font-size: 35px;
+  color: #333333;
   text-align: center;
 }
 
@@ -85,8 +109,8 @@ div {
   display: block;
   flex-direction: column;
   margin-bottom: 5px;
-  font-size: 14px;
-  color: #555;
+  font-size: 18px;
+  color: #070707;
 }
 
 .form-group input,
@@ -125,7 +149,7 @@ div {
   display: flex;
   padding: 5px;
   list-style: none;
-  background-color: #007bff;
+  background-color: #368ae4;
   margin: 5px;
 
 }

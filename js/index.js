@@ -20,8 +20,8 @@ if (document.cookie.includes("students=")){
         <td>${student.ISU}</td>
         <td>
             <div class="container-div">  
-                <button class="container-button data-id="${student.id}">Редактировать</button>
-                <button class="container-button" data-id="${student.id}">Удалить</button>
+                <button class="edit-button data-id="${student.id}">Редактировать</button>
+                <button class="delete-button" data-id="${student.id}">Удалить</button>
                 <button class="container-button" data-id="${student.id}">Подробная информация</button>
             </div>
         </td>
