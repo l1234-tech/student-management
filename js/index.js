@@ -10,6 +10,7 @@ if (document.cookie.includes("students=")){
 }
 
 
+
  const table = document.getElementById("student-table");
  table.innerHTML = "";
  students.forEach(function(student){
@@ -17,15 +18,14 @@ if (document.cookie.includes("students=")){
         <td>${student.fullName}</td>
         <td>${student.group}</td>
         <td>${student.ISU}</td>
-        <td>${student.numberHouse}</td>
-        <td>${student.numberRoom}</td>
         <td>
-            <div class="container-div>
-                <button class="container-button">Редактировать</button>
-                <button class="container-button">Удалить</button>
-                <button class="container-button">Подробная информация</button>
+            <div class="container-div">  
+                <button class="container-button data-id="${student.id}">Редактировать</button>
+                <button class="container-button" data-id="${student.id}">Удалить</button>
+                <button class="container-button" data-id="${student.id}">Подробная информация</button>
             </div>
         </td>
             
     </tr>`;  
 })
+
