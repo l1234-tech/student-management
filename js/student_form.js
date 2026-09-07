@@ -14,11 +14,12 @@ form.addEventListener("submit", function(event) {
     const note = document.getElementById("note").value;
 
     const user = {
-        full_name: full_name,
+        id: Date.now(),
+        fullName: full_name,
         group: group,
-        ISU: ISU,
-        number_house: number_house,
-        number_room: number_room,
+        ISU: Number(ISU),
+        numberHouse: Number(number_house),
+        numberRoom: Number(number_room),
         date: date,
         inostran: inostran,
         note: note
@@ -31,17 +32,14 @@ form.addEventListener("submit", function(event) {
         const decodedData = decodeURIComponent(cookiesData);
 
         students = JSON.parse(decodedData);
-        if (students.some(student => student.ISU === user.ISU)){
-            console.log("Такой пользователь уже есть!")
-        } else {
-            students.push(user);
-            const data = encodeURIComponent(
-                JSON.stringify(students)
-            );
+        students.push(user);
+        const data = encodeURIComponent(
+            JSON.stringify(students)
+        );
 
-            document.cookie = `students=${data}`;
-            console.log(students);
-        }
+        document.cookie = `students=${data}`;
+
+        console.log(students);
 
     } else{
         students = [];
@@ -51,7 +49,10 @@ form.addEventListener("submit", function(event) {
         );
 
         document.cookie = `students=${data}`;
+
         console.log(students);
     }
+    
+    window.location.href = "index.html"
 
 });
