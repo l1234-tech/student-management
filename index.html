@@ -12,11 +12,13 @@
         </title>
     </head>
     <body>
-        <div>
-            <nav>
-                <a class="li a" href="index.html">Главная</a>
-                <a class="li a" href="student.html">Досье студента</a>
-                <a class="li a" href="student_form.html">Изменение/добавление досье</a>
+        <div class="nav-list">
+            <nav class="nav">
+                <ul  class="nav-list">
+                    <a class="nav-link" href="index.html">Главная</a>
+                    <a class="nav-link" href="student.html">Досье студента</a>
+                    <a class="nav-link" href="student_form.html">Изменение/добавление досье</a>
+                </ul>
             </nav>
         </div>
         <div>
@@ -39,28 +41,17 @@
                             <th> ФИО студента </th>
                             <th> Группа </th>
                             <th> ИСУ id </th>
-                            <th> Номер общежития </th>
-                            <th> Комната </th>
                             <th> Действия</th>
                         </tr>
                     </thead>
                     <tbody id="student-table">
-                        <tr>
-                                <div class="container-div">
-                                    <button class="container-button">Редактировать</button>
-                                    <button class="container-button">Удалить</button>
-                                    <button class="container-button">Подробная информация</button>
-                                </div>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
 
         </main>
-
-        <footer>
-            <p>Сайтик</p>
+        <footer class="site-footer">
+            Веб программирование 2026
         </footer>
         <script src="js/index.js"></script>
 
