@@ -1,3 +1,33 @@
+const params = new URLSearchParams(window.location.search);
+const editId = Number(params.get("id"));
+
+let students = [];
+
+if (document.cookie.includes("students=")){
+    const cookiesData = document.cookie.split("students=")[1];
+    const decodedData = decodeURIComponent(cookiesData);
+    students = JSON.parse(decodedData);
+    console.log(students);
+}else{
+    console.log("Студентов нет");
+}
+
+const editStudent = students.find(function(student){
+    return student.id === editId;
+});
+
+if (editStudent) {
+    document.getElementById("full-name").value = editStudent.fullName;
+    document.getElementById("group").value = editStudent.group;
+    document.getElementById("ISU").value = editStudent.ISU;
+    document.getElementById("number-house").value = editStudent.numberHouse;
+    document.getElementById("number-room").value = editStudent.numberRoom;
+    document.getElementById("date").value = editStudent.date;
+    document.getElementById("inostran").checked = editStudent.inostran;
+    document.getElementById("note").value = editStudent.note;
+}
+
+
 const form = document.getElementById("UserForm");
 
 form.addEventListener("submit", function(event) {
@@ -14,7 +44,7 @@ form.addEventListener("submit", function(event) {
     const note = document.getElementById("note").value;
 
     const user = {
-        id: Date.now(),
+        id:editId || Date.now(),
         fullName: full_name,
         group: group,
         ISU: Number(ISU),
@@ -25,34 +55,24 @@ form.addEventListener("submit", function(event) {
         note: note
     };
 
-    let students;
 
-    if (document.cookie.includes("students=")){
-        const cookiesData = document.cookie.split("students=")[1];
-        const decodedData = decodeURIComponent(cookiesData);
+    if (editId) {
+        students = students.map(function(student) {
+            if (student.id === editId) {
+                return user;
+            }
 
-        students = JSON.parse(decodedData);
+            return student;
+        });
+    } else {
         students.push(user);
-        const data = encodeURIComponent(
-            JSON.stringify(students)
-        );
-
-        document.cookie = `students=${data}`;
-
-        console.log(students);
-
-    } else{
-        students = [];
-        students.push(user);
-        const data = encodeURIComponent(
-            JSON.stringify(students)
-        );
-
-        document.cookie = `students=${data}`;
-
-        console.log(students);
     }
+
+        console.log(students);
     
-    window.location.href = "index.html"
+    const data = encodeURIComponent(JSON.stringify(students));
+    document.cookie = `students=${data}`;
+
+    window.location.href = "index.html";
 
 });
