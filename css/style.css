@@ -167,3 +167,9 @@ div {
   background-color: #f1f1f1; 
   padding: 20px 0;
 }
+
+@media (min-widht: 768px){
+  body {
+    font-size: 16px;
+  }
+}
