@@ -1,9 +1,9 @@
 #title {
-    font-size: 32px;
+    font-size: 35px;
 }
 
 .add-button {
-    background-color: #4eb24d;
+    background-color: #2b8629;
     border: none;
     border-radius: 8px;
     color: white;
@@ -38,7 +38,7 @@
     font-size: 15px;
 }
 
-.container-button {
+.info-button {
     background-color: #3a79bc;
     border: none;
     border-radius: 8px;
@@ -57,12 +57,17 @@
     border: 2px solid black;
 }
 
-th,
+th{
+  border: 1px solid #000000; 
+  padding: 8px;             
+  text-align: left;
+  font-size: 25px;
+}
 td {
   border: 1px solid #000000; 
   padding: 8px;             
   text-align: left;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 div {
@@ -147,9 +152,10 @@ div {
 
 .nav-list {
   display: flex;
+  width: 98,5%;
   padding: 5px;
   list-style: none;
-  background-color: #368ae4;
+  background-color: #1f68b7;
   margin: 5px;
 
 }
