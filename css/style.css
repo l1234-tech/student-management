@@ -146,6 +146,18 @@ div {
     outline: none;
 }
 
+.input-error {
+    border-color: #e53935;
+    background-color: #fff0f0;
+}
+
+.field-error {
+    display: block;
+    color: #c62828;
+    font-size: 0.73vw;
+    margin-top: 0.46vh;
+}
+
 .submit-btn {
     width: 100%;
     padding: 1.11vh 0.63vw;
