@@ -3,129 +3,141 @@
 }
 
 body {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 0.73vw;
+    padding: 0.93vh 0.52vw;
     font-family: sans-serif;
     margin: 0;
 }
 
 #title {
-    font-size: 24px;
+    font-size: 1.25vw;
     text-align: center;
 }
 
 .add-button, .edit-button, .delete-button, .info-button {
     border: none;
-    border-radius: 8px;
+    border-radius: 0.42vw;
     color: white;
-    padding: 10px 12px; 
+    padding: 0.93vh 0.63vw;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 0.73vw;
     cursor: pointer;
 }
 
-.add-button    { background-color: #2b8629; font-size: 16px; }
-.edit-button   { background-color: #57a756; }
-.delete-button { background-color: #ce5858; }
-.info-button   { background-color: #3a79bc; }
+.add-button {
+    background-color: #2b8629;
+    font-size: 0.83vw;
+}
+
+.edit-button {
+    background-color: #57a756;
+}
+
+.delete-button {
+    background-color: #ce5858;
+}
+
+.info-button {
+    background-color: #3a79bc;
+}
 
 .table {
     table-layout: auto;
     width: 100%;
     border-collapse: collapse;
-    border: 2px solid black;
+    border: 0.10vw solid black;
 }
 
 th {
-    border: 1px solid #000000; 
-    padding: 6px;             
+    border: 0.05vw solid #000000;
+    padding: 0.56vh 0.31vw;
     text-align: left;
-    font-size: 16px;
+    font-size: 0.83vw;
 }
 
 td {
-    border: 1px solid #000000; 
-    padding: 6px;             
+    border: 0.05vw solid #000000;
+    padding: 0.56vh 0.31vw;
     text-align: left;
-    font-size: 14px; 
+    font-size: 0.73vw;
 }
 
 div {
     display: flex;
-    flex-direction: column; 
-    margin: 10px;
+    flex-direction: column;
+    margin: 0.93vh 0.52vw;
 }
 
 .container-div {
     flex-direction: column;
-    margin: 10px;
-    gap: 10px; 
+    margin: 0.93vh 0.52vw;
+    gap: 0.93vh;
 }
 
 .nav-list {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     width: 100%;
-    padding: 10px;
+    padding: 0.93vh 0.52vw;
     list-style: none;
     background-color: #1f68b7;
-    margin: 0 8px;
-    gap: 8px;
+    margin: 0 0.42vw;
+    gap: 0.74vh;
 }
 
 .nav-link {
     display: block;
-    padding: 5px 8px;
+    padding: 0.46vh 0.42vw;
     color: white;
-    font-size: 22px;
+    font-size: 1.15vw;
     text-decoration: none;
 }
 
 .form {
     flex-direction: column;
-    padding: 8px;
-    font-size: 16px;
+    padding: 0.74vh 0.42vw;
+    font-size: 0.83vw;
 }
 
 .main-form {
-    width: 100%; 
+    width: 100%;
     max-width: 100%;
     margin: 0 auto;
-    padding: 15px;
+    padding: 1.39vh 0.78vw;
     background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0.42vw;
+    box-shadow: 0 0.37vh 0.52vw rgba(0, 0, 0, 0.1);
 }
 
 .main-form h2 {
-    margin-bottom: 15px;
-    font-size: 24px; 
+    margin-bottom: 1.39vh;
+    font-size: 1.25vw;
     color: #333333;
     text-align: center;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 1.39vh;
     flex-direction: column;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-size: 16px;
+    margin-bottom: 0.46vh;
+    font-size: 0.83vw;
     color: #070707;
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 0.93vh 0.52vw;
+    border: 0.05vw solid #ccc;
+    border-radius: 0.21vw;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 0.73vw;
 }
 
 .form-group input:focus,
@@ -136,12 +148,12 @@ div {
 
 .submit-btn {
     width: 100%;
-    padding: 12px;
+    padding: 1.11vh 0.63vw;
     background: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 0.21vw;
+    font-size: 0.83vw;
     cursor: pointer;
 }
 
@@ -151,25 +163,25 @@ div {
 
 .site-footer {
     text-align: center;
-    font-size: 14px;
-    background-color: #f1f1f1; 
-    padding: 15px 0;
+    font-size: 0,75vw;
+    background-color: #f1f1f1;
+    padding: 1.39vh 0;
 }
 
 
 @media (min-width: 768px) {
     body {
-        font-size: 16px;
-        padding: 20px;
+        font-size: 0.83vw;
+        padding: 1.85vh 1.04vw;
     }
 
     #title {
-        font-size: 30px;
+        font-size: 1.56vw;
         text-align: left;
     }
 
     div {
-        flex-direction: row; 
+        flex-direction: row;
     }
 
     .nav-list {
@@ -181,39 +193,64 @@ div {
         table-layout: fixed;
     }
 
-    th { font-size: 20px; padding: 8px; }
-    td { font-size: 18px; padding: 8px; }
+    th {
+        font-size: 1.04vw;
+        padding: 0.74vh 0.42vw;
+    }
 
-    .add-button { font-size: 18px; padding: 12px 14px; } 
-    .edit-button, .delete-button, .info-button { font-size: 15px; padding: 12px 14px; }
+    td {
+        font-size: 0.94vw;
+        padding: 0.74vh 0.42vw;
+    }
+
+    .add-button {
+        font-size: 0.94vw;
+        padding: 1.11vh 0.73vw;
+    }
+
+    .edit-button,
+    .delete-button,
+    .info-button {
+        font-size: 0.78vw;
+        padding: 1.11vh 0.73vw;
+    }
 
     .main-form {
-        max-width: 400px;
+        max-width: 20.83vw;
     }
 }
 
 
 @media (min-width: 1024px) {
     body {
-        font-size: 18px;
+        font-size: 0.94vw;
     }
 
     #title {
-        font-size: 35px;
+        font-size: 1.82vw;
     }
 
     .container-div {
-        max-width: 1200px;
+        max-width: 62.5vw;
         margin: 0 auto;
-        flex-direction: row; 
+        flex-direction: row;
     }
 
-    th { font-size: 25px; }
-    td { font-size: 22px; }
-    
-    .add-button { font-size: 20px; padding: 15px 16px; width: 100%; }
+    th {
+        font-size: 1.30vw;
+    }
+
+    td {
+        font-size: 1.15vw;
+    }
+
+    .add-button {
+        font-size: 1.04vw;
+        padding: 1.39vh 0.83vw;
+        width: 100%;
+    }
 
     .main-form h2 {
-        font-size: 35px;
+        font-size: 1.82vw;
     }
 }
