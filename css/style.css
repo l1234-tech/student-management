@@ -3,30 +3,30 @@
 }
 
 body {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 3.6vw;
+    padding: 1vh 0.8vw;
     font-family: sans-serif;
     margin: 0;
 }
 
 #title {
-    font-size: 24px;
+    font-size: 6vw;
     text-align: center;
 }
 
 .add-button, .edit-button, .delete-button, .info-button {
     border: none;
-    border-radius: 8px;
+    border-radius: 0.6vw;
     color: white;
-    padding: 10px 12px; 
+    padding: 1vh 0.9vw; 
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 3.4vw;
     cursor: pointer;
 }
 
-.add-button    { background-color: #2b8629; font-size: 16px; }
+.add-button    { background-color: #2b8629; font-size: 3.8vw; }
 .edit-button   { background-color: #57a756; }
 .delete-button { background-color: #ce5858; }
 .info-button   { background-color: #3a79bc; }
@@ -35,97 +35,97 @@ body {
     table-layout: auto;
     width: 100%;
     border-collapse: collapse;
-    border: 2px solid black;
+    border: 0.15vw solid black;
 }
 
 th {
-    border: 1px solid #000000; 
-    padding: 6px;             
+    border: 0.08vw solid #000000; 
+    padding: 0.6vh 0.5vw;             
     text-align: left;
-    font-size: 16px;
+    font-size: 3.6vw;
 }
 
 td {
-    border: 1px solid #000000; 
-    padding: 6px;             
+    border: 0.08vw solid #000000; 
+    padding: 0.6vh 0.5vw;             
     text-align: left;
-    font-size: 14px; 
+    font-size: 3.3vw; 
 }
 
 div {
     display: flex;
     flex-direction: column; 
-    margin: 10px;
+    margin: 1vh 0.8vw;
 }
 
 .container-div {
     flex-direction: column;
-    margin: 10px;
-    gap: 10px; 
+    margin: 1vh 0.8vw;
+    gap: 1vh; 
 }
 
 .nav-list {
     display: flex;
     flex-direction: column; 
     width: 100%;
-    padding: 10px;
+    padding: 1vh 0.8vw;
     list-style: none;
     background-color: #1f68b7;
-    margin: 0 8px;
-    gap: 8px;
+    margin: 0 0.6vw;
+    gap: 0.8vh;
 }
 
 .nav-link {
     display: block;
-    padding: 5px 8px;
+    padding: 0.5vh 0.6vw;
     color: white;
-    font-size: 22px;
+    font-size: 4.8vw;
     text-decoration: none;
 }
 
 .form {
     flex-direction: column;
-    padding: 8px;
-    font-size: 16px;
+    padding: 0.8vh 0.6vw;
+    font-size: 3.6vw;
 }
 
 .main-form {
-    width: 100%; 
-    max-width: 100%;
+    width: 90vw; 
+    max-width: 90vw;
     margin: 0 auto;
-    padding: 15px;
+    padding: 2vh 2vw;
     background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0.6vw;
+    box-shadow: 0 0.4vh 0.8vw rgba(0, 0, 0, 0.1);
 }
 
 .main-form h2 {
-    margin-bottom: 15px;
-    font-size: 24px; 
+    margin-bottom: 1.5vh;
+    font-size: 5.6vw; 
     color: #333333;
     text-align: center;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 1.5vh;
     flex-direction: column;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-size: 16px;
+    margin-bottom: 0.5vh;
+    font-size: 3.6vw;
     color: #070707;
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 1vh 0.8vw;
+    border: 0.08vw solid #ccc;
+    border-radius: 0.3vw;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 3.4vw;
 }
 
 .form-group input:focus,
@@ -136,12 +136,12 @@ div {
 
 .submit-btn {
     width: 100%;
-    padding: 12px;
+    padding: 1.2vh 1vw;
     background: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 0.3vw;
+    font-size: 3.8vw;
     cursor: pointer;
 }
 
@@ -151,20 +151,20 @@ div {
 
 .site-footer {
     text-align: center;
-    font-size: 14px;
+    font-size: 3.4vw;
     background-color: #f1f1f1; 
-    padding: 15px 0;
+    padding: 1.5vh 0;
 }
 
 
 @media (min-width: 768px) {
     body {
-        font-size: 16px;
-        padding: 20px;
+        font-size: 1.15vw;
+        padding: 2vh 1.5vw;
     }
 
     #title {
-        font-size: 30px;
+        font-size: 2.2vw;
         text-align: left;
     }
 
@@ -177,43 +177,64 @@ div {
         width: auto;
     }
 
+    .nav-link {
+        font-size: 1.6vw;
+        padding: 0.7vh 0.8vw;
+    }
+
+    .site-footer {
+        font-size: 1.6vw;
+        padding: 1.2vh 0;
+    }
+
     .table {
         table-layout: fixed;
     }
 
-    th { font-size: 20px; padding: 8px; }
-    td { font-size: 18px; padding: 8px; }
+    th { font-size: 1.5vw; padding: 0.8vh 0.6vw; }
+    td { font-size: 1.3vw; padding: 0.8vh 0.6vw; }
 
-    .add-button { font-size: 18px; padding: 12px 14px; } 
-    .edit-button, .delete-button, .info-button { font-size: 15px; padding: 12px 14px; }
+    .add-button { font-size: 1.3vw; padding: 1.2vh 1vw; } 
+    .edit-button, .delete-button, .info-button { font-size: 1.1vw; padding: 1.2vh 1vw; }
 
     .main-form {
-        max-width: 400px;
+        width: 55vw;
+        max-width: 55vw;
     }
 }
 
 
 @media (min-width: 1024px) {
     body {
-        font-size: 18px;
+        font-size: 1.25vw;
     }
 
     #title {
-        font-size: 35px;
+        font-size: 2.5vw;
     }
 
     .container-div {
-        max-width: 1200px;
+        max-width: 85vw;
         margin: 0 auto;
         flex-direction: row; 
     }
 
-    th { font-size: 25px; }
-    td { font-size: 22px; }
+    .nav-link {
+        font-size: 1.8vw;
+        padding: 0.8vh 1vw;
+    }
+
+    .site-footer {
+        font-size: 2vw;
+        padding: 1.4vh 0;
+    }
+
+    th { font-size: 1.45vw; }
+    td { font-size: 1.25vw; }
     
-    .add-button { font-size: 20px; padding: 15px 16px; width: 100%; }
+    .add-button { font-size: 1.45vw; padding: 1.5vh 1.2vw; width: 100%; }
 
     .main-form h2 {
-        font-size: 35px;
+        font-size: 2.5vw;
     }
 }
