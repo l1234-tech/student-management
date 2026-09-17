@@ -3,105 +3,120 @@
 }
 
 body {
-    font-size: 3.6vw;
+    font-size: 0.95vw;
     padding: 1vh 0.8vw;
     font-family: sans-serif;
     margin: 0;
 }
 
 #title {
-    font-size: 6vw;
+    font-size: 2vw;
     text-align: center;
 }
 
-.add-button, .edit-button, .delete-button, .info-button {
+.add-button,
+.edit-button,
+.delete-button,
+.info-button {
     border: none;
-    border-radius: 0.6vw;
+    border-radius: 0.45vw;
     color: white;
-    padding: 1vh 0.9vw; 
+    padding: 1vh 0.8vw;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 3.4vw;
+    font-size: 0.95vw;
     cursor: pointer;
 }
 
-.add-button    { background-color: #2b8629; font-size: 3.8vw; }
-.edit-button   { background-color: #57a756; }
-.delete-button { background-color: #ce5858; }
-.info-button   { background-color: #3a79bc; }
+.add-button {
+    background-color: #2b8629;
+    font-size: 1.05vw;
+}
+
+.edit-button {
+    background-color: #57a756;
+}
+
+.delete-button {
+    background-color: #ce5858;
+}
+
+.info-button {
+    background-color: #3a79bc;
+}
 
 .table {
     table-layout: auto;
     width: 100%;
     border-collapse: collapse;
-    border: 0.15vw solid black;
+    border: 0.1vw solid black;
 }
 
 th {
-    border: 0.08vw solid #000000; 
-    padding: 0.6vh 0.5vw;             
+    border: 0.05vw solid #000000;
+    padding: 0.7vh 0.5vw;
     text-align: left;
-    font-size: 3.6vw;
+    font-size: 1.05vw;
 }
 
 td {
-    border: 0.08vw solid #000000; 
-    padding: 0.6vh 0.5vw;             
+    border: 0.05vw solid #000000;
+    padding: 0.7vh 0.5vw;
     text-align: left;
-    font-size: 3.3vw; 
+    font-size: 0.95vw;
 }
 
 div {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     margin: 1vh 0.8vw;
 }
 
 .container-div {
     flex-direction: column;
     margin: 1vh 0.8vw;
-    gap: 1vh; 
+    gap: 1vh;
 }
 
 .nav-list {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     width: 100%;
     padding: 1vh 0.8vw;
     list-style: none;
     background-color: #1f68b7;
-    margin: 0 0.6vw;
+    margin: 0 0.5vw;
     gap: 0.8vh;
 }
 
 .nav-link {
     display: block;
-    padding: 0.5vh 0.6vw;
+    padding: 0.6vh 0.7vw;
     color: white;
-    font-size: 4.8vw;
+    font-size: 1.4vw;
     text-decoration: none;
 }
 
 .form {
     flex-direction: column;
     padding: 0.8vh 0.6vw;
-    font-size: 3.6vw;
+    font-size: 1vw;
 }
 
 .main-form {
-    width: 90vw; 
+    width: 90vw;
     max-width: 90vw;
     margin: 0 auto;
     padding: 2vh 2vw;
     background: #f9f9f9;
-    border-radius: 0.6vw;
-    box-shadow: 0 0.4vh 0.8vw rgba(0, 0, 0, 0.1);
+    border-radius: 0.45vw;
+    box-shadow: 0 0.4vh 0.7vw rgba(0, 0, 0, 0.1);
 }
 
 .main-form h2 {
     margin-bottom: 1.5vh;
-    font-size: 5.6vw; 
+    font-size: 2vw;
     color: #333333;
     text-align: center;
 }
@@ -114,7 +129,7 @@ div {
 .form-group label {
     display: block;
     margin-bottom: 0.5vh;
-    font-size: 3.6vw;
+    font-size: 1vw;
     color: #070707;
 }
 
@@ -122,10 +137,10 @@ div {
 .form-group textarea {
     width: 100%;
     padding: 1vh 0.8vw;
-    border: 0.08vw solid #ccc;
-    border-radius: 0.3vw;
+    border: 0.05vw solid #ccc;
+    border-radius: 0.25vw;
     box-sizing: border-box;
-    font-size: 3.4vw;
+    font-size: 0.95vw;
 }
 
 .form-group input:focus,
@@ -134,14 +149,26 @@ div {
     outline: none;
 }
 
+.input-error {
+    border-color: #e53935;
+    background-color: #fff0f0;
+}
+
+.field-error {
+    display: block;
+    color: #c62828;
+    font-size: 0.85vw;
+    margin-top: 0.5vh;
+}
+
 .submit-btn {
     width: 100%;
     padding: 1.2vh 1vw;
     background: #007bff;
     color: white;
     border: none;
-    border-radius: 0.3vw;
-    font-size: 3.8vw;
+    border-radius: 0.25vw;
+    font-size: 1.05vw;
     cursor: pointer;
 }
 
@@ -151,25 +178,24 @@ div {
 
 .site-footer {
     text-align: center;
-    font-size: 3.4vw;
-    background-color: #f1f1f1; 
-    padding: 1.5vh 0;
+    font-size: 1vw;
+    background-color: #f1f1f1;
+    padding: 1.4vh 0;
 }
-
 
 @media (min-width: 768px) {
     body {
-        font-size: 1.15vw;
+        font-size: 1vw;
         padding: 2vh 1.5vw;
     }
 
     #title {
-        font-size: 2.2vw;
+        font-size: 2vw;
         text-align: left;
     }
 
     div {
-        flex-direction: row; 
+        flex-direction: row;
     }
 
     .nav-list {
@@ -178,63 +204,85 @@ div {
     }
 
     .nav-link {
-        font-size: 1.6vw;
+        font-size: 1.3vw;
         padding: 0.7vh 0.8vw;
-    }
-
-    .site-footer {
-        font-size: 1.6vw;
-        padding: 1.2vh 0;
     }
 
     .table {
         table-layout: fixed;
     }
 
-    th { font-size: 1.5vw; padding: 0.8vh 0.6vw; }
-    td { font-size: 1.3vw; padding: 0.8vh 0.6vw; }
+    th {
+        font-size: 1.25vw;
+        padding: 0.8vh 0.6vw;
+    }
 
-    .add-button { font-size: 1.3vw; padding: 1.2vh 1vw; } 
-    .edit-button, .delete-button, .info-button { font-size: 1.1vw; padding: 1.2vh 1vw; }
+    td {
+        font-size: 1.1vw;
+        padding: 0.8vh 0.6vw;
+    }
+
+    .add-button {
+        font-size: 1.15vw;
+        padding: 1.2vh 1vw;
+    }
+
+    .edit-button,
+    .delete-button,
+    .info-button {
+        font-size: 0.95vw;
+        padding: 1.1vh 0.8vw;
+    }
 
     .main-form {
         width: 55vw;
         max-width: 55vw;
     }
-}
 
+    .site-footer {
+        font-size: 1.1vw;
+    }
+}
 
 @media (min-width: 1024px) {
     body {
-        font-size: 1.25vw;
+        font-size: 1.05vw;
     }
 
     #title {
-        font-size: 2.5vw;
+        font-size: 2.1vw;
     }
 
     .container-div {
         max-width: 85vw;
         margin: 0 auto;
-        flex-direction: row; 
+        flex-direction: row;
     }
 
     .nav-link {
-        font-size: 1.8vw;
+        font-size: 1.5vw;
         padding: 0.8vh 1vw;
     }
 
-    .site-footer {
-        font-size: 2vw;
-        padding: 1.4vh 0;
+    th {
+        font-size: 1.35vw;
     }
 
-    th { font-size: 1.45vw; }
-    td { font-size: 1.25vw; }
-    
-    .add-button { font-size: 1.45vw; padding: 1.5vh 1.2vw; width: 100%; }
+    td {
+        font-size: 1.15vw;
+    }
+
+    .add-button {
+        font-size: 1.25vw;
+        padding: 1.4vh 1.1vw;
+        width: 100%;
+    }
 
     .main-form h2 {
-        font-size: 2.5vw;
+        font-size: 2.1vw;
+    }
+
+    .site-footer {
+        font-size: 1.4vw;
     }
 }

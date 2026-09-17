@@ -32,6 +32,11 @@ const form = document.getElementById("UserForm");
 
 form.addEventListener("submit", function(event) {
 
+    if (!validate()) {
+        event.preventDefault();
+        return;
+    }
+
     event.preventDefault();
 
     const full_name = document.getElementById("full-name").value;
