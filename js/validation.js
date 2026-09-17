@@ -3,6 +3,8 @@ function validate() {
     const group = document.getElementById('group').value.trim();
     const ISU = document.getElementById('ISU').value.trim();
     const date = document.getElementById('date').value.trim();
+    const params = new URLSearchParams(window.location.search);
+    const editId = Number(params.get('id'));
     clearErrors();
 
     if (!/^[a-zA-Zа-яА-ЯёЁ\s]+$/.test(full_name)) {
@@ -10,8 +12,8 @@ function validate() {
         return false;
     }
 
-    if (!/^[a-zA-Zа-яА-Я0-9ёЁ]+$/.test(group)) {
-        showError('group', 'Группа должна состоять только из букв и цифр');
+    if (!/^[a-zA-Zа-яА-ЯёЁ][0-9]{4,5}$/.test(group)) {
+        showError('group', 'Группа должна начинаться с буквы, затем 4-5 цифр');
         return false;
     }
 
@@ -22,6 +24,17 @@ function validate() {
 
     if (ISU[0] === '0') {
         showError('ISU', 'ИСУ не может начинаться с нуля');
+        return false;
+    }
+
+    const students = getStudentsFromCookie();
+    const isuNumber = Number(ISU);
+    const sameIsuStudent = students.find(function(student) {
+        return Number(student.ISU) === isuNumber && Number(student.id) !== editId;
+    });
+
+    if (sameIsuStudent) {
+        showError('ISU', 'Студент с таким ИСУ уже существует');
         return false;
     }
 
@@ -39,6 +52,16 @@ function validate() {
     }
 
     return true;
+}
+
+function getStudentsFromCookie() {
+    if (!document.cookie.includes('students=')) {
+        return [];
+    }
+
+    const cookiesData = document.cookie.split('students=')[1].split(';')[0];
+    const decodedData = decodeURIComponent(cookiesData);
+    return JSON.parse(decodedData);
 }
 
 function showError(fieldId, message) {
