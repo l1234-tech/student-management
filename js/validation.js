@@ -2,6 +2,8 @@ function validate() {
     const full_name = document.getElementById('full-name').value.trim();
     const group = document.getElementById('group').value.trim();
     const ISU = document.getElementById('ISU').value.trim();
+    const numberHouse = document.getElementById('number-house').value.trim();
+    const numberRoom = document.getElementById('number-room').value.trim();
     const date = document.getElementById('date').value.trim();
     const params = new URLSearchParams(window.location.search);
     const editId = Number(params.get('id'));
@@ -17,13 +19,20 @@ function validate() {
         return false;
     }
 
-    if (isNaN(ISU) || ISU === '') {
-        showError('ISU', 'ИСУ может состоять только из цифр');
+    if (!/^[1-9][0-9]{5}$/.test(ISU)) {
+        showError('ISU', 'ИСУ должен состоять из 6 цифр и не начинаться с нуля');
         return false;
     }
 
-    if (ISU[0] === '0') {
-        showError('ISU', 'ИСУ не может начинаться с нуля');
+    const houseNumber = Number(numberHouse);
+    if (!Number.isInteger(houseNumber) || houseNumber < 1 || houseNumber > 20) {
+        showError('number-house', 'Номер общежития должен быть от 1 до 20');
+        return false;
+    }
+
+    const roomNumber = Number(numberRoom);
+    if (!Number.isInteger(roomNumber) || roomNumber < 1000 || roomNumber > 9999) {
+        showError('number-room', 'Номер комнаты должен быть четырехзначным числом');
         return false;
     }
 
@@ -39,8 +48,13 @@ function validate() {
     }
 
 
-    let year = date.substring(0, 4);
-    if (year < '2016') {
+    const settlementDate = new Date(date);
+    if (!date || Number.isNaN(settlementDate.getTime())) {
+        showError('date', 'Введите корректную дату заселения');
+        return false;
+    }
+
+    if (settlementDate.getFullYear() < 2016) {
         showError('date', 'Вы не могли заселиться в такую дату, или вы уже не студент');
         return false;
     }
@@ -55,13 +69,16 @@ function validate() {
 }
 
 function getStudentsFromCookie() {
-    if (!document.cookie.includes('students=')) {
+    const match = document.cookie.match(/(?:^|;\s*)students=([^;]*)/);
+    if (!match) return [];
+
+    try {
+        return JSON.parse(decodeURIComponent(match[1]));
+    } catch (error) {
+        // Если cookie повредили вручную, форма не должна падать при валидации.
+        console.log(error);
         return [];
     }
-
-    const cookiesData = document.cookie.split('students=')[1].split(';')[0];
-    const decodedData = decodeURIComponent(cookiesData);
-    return JSON.parse(decodedData);
 }
 
 function showError(fieldId, message) {

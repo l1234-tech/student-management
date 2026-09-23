@@ -1,12 +1,10 @@
 const params = new URLSearchParams(window.location.search);
 const editId = Number(params.get("id"));
+const hasEditId = params.has("id") && !Number.isNaN(editId);
 
-let students = [];
+let students = getStudentsFromCookie();
 
-if (document.cookie.includes("students=")){
-    const cookiesData = document.cookie.split("students=")[1];
-    const decodedData = decodeURIComponent(cookiesData);
-    students = JSON.parse(decodedData);
+if (students.length > 0){
     console.log(students);
 }else{
     console.log("Студентов нет");
@@ -25,6 +23,12 @@ if (editStudent) {
     document.getElementById("date").value = editStudent.date;
     document.getElementById("inostran").checked = editStudent.inostran;
     document.getElementById("note").value = editStudent.note;
+}
+
+if (hasEditId && !editStudent) {
+    console.log("Студент для редактирования не найден");
+    alert("Студент для редактирования не найден");
+    window.location.href = "index.html";
 }
 
 
@@ -49,7 +53,7 @@ form.addEventListener("submit", function(event) {
     const note = document.getElementById("note").value;
 
     const user = {
-        id:editId || Date.now(),
+        id: hasEditId ? editId : Date.now(),
         fullName: full_name,
         group: group,
         ISU: Number(ISU),
@@ -61,7 +65,7 @@ form.addEventListener("submit", function(event) {
     };
 
 
-    if (editId) {
+    if (hasEditId) {
         students = students.map(function(student) {
             if (student.id === editId) {
                 return user;
@@ -76,8 +80,21 @@ form.addEventListener("submit", function(event) {
         console.log(students);
     
     const data = encodeURIComponent(JSON.stringify(students));
-    document.cookie = `students=${data}`;
+    document.cookie = `students=${data}; path=/; max-age=31536000`;
 
     window.location.href = "index.html";
 
 });
+
+function getStudentsFromCookie() {
+    const match = document.cookie.match(/(?:^|;\s*)students=([^;]*)/);
+    if (!match) return [];
+
+    try {
+        return JSON.parse(decodeURIComponent(match[1]));
+    } catch (error) {
+        // Если cookie повредили вручную, страница формы не должна падать при открытии.
+        console.log(error);
+        return [];
+    }
+}

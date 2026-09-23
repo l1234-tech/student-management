@@ -1,9 +1,8 @@
 let students = [];
 
-if (document.cookie.includes("students=")){
-    const cookiesData = document.cookie.split("students=")[1];
-    const decodedData = decodeURIComponent(cookiesData);
-    students = JSON.parse(decodedData);
+students = getStudentsFromCookie();
+
+if (students.length > 0){
     console.log(students);
 }else{
     console.log("Студентов нет");
@@ -11,21 +10,40 @@ if (document.cookie.includes("students=")){
 
 
  const table = document.getElementById("student-table");
- table.innerHTML = "";
- students.forEach(function(student){
-    table.innerHTML += `<tr>
-        <td>${student.fullName}</td>
-        <td>${student.group}</td>
-        <td>${student.ISU}</td>
-        <td>
-            <div class="container-div">
-                <button class="edit-button" data-id="${student.id}">Редактировать</button>
-                <button class="delete-button" data-id="${student.id}">Удалить</button>
-                <button class="info-button" data-id="${student.id}">Подробная информация</button>
-            </div>
-        </td>
-            
-    </tr>`;  
+ table.textContent = "";
+  students.forEach(function(student){
+    const row = document.createElement("tr");
+    const fullNameCell = document.createElement("td");
+    const groupCell = document.createElement("td");
+    const isuCell = document.createElement("td");
+    const actionCell = document.createElement("td");
+    const buttonContainer = document.createElement("div");
+    const editButton = document.createElement("button");
+    const deleteButton = document.createElement("button");
+    const infoButton = document.createElement("button");
+
+    fullNameCell.textContent = student.fullName;
+    groupCell.textContent = student.group;
+    isuCell.textContent = student.ISU;
+
+    buttonContainer.className = "container-div";
+
+    editButton.className = "edit-button";
+    editButton.dataset.id = student.id;
+    editButton.textContent = "Редактировать";
+
+    deleteButton.className = "delete-button";
+    deleteButton.dataset.id = student.id;
+    deleteButton.textContent = "Удалить";
+
+    infoButton.className = "info-button";
+    infoButton.dataset.id = student.id;
+    infoButton.textContent = "Подробная информация";
+
+    buttonContainer.append(editButton, deleteButton, infoButton);
+    actionCell.append(buttonContainer);
+    row.append(fullNameCell, groupCell, isuCell, actionCell);
+    table.append(row);
 })
 
 const deleteButtons = document.querySelectorAll(".delete-button");
@@ -39,7 +57,7 @@ deleteButtons.forEach(function(button){
         })
 
         const data = encodeURIComponent(JSON.stringify(students));
-        document.cookie = `students=${data}`;
+        document.cookie = `students=${data}; path=/; max-age=31536000`;
         window.location.reload();
     });
 
@@ -68,3 +86,16 @@ const addButton = document.querySelector(".add-button");
 addButton.addEventListener("click",function(){
     window.location.href = "student_form.html";
 });
+
+function getStudentsFromCookie() {
+    const match = document.cookie.match(/(?:^|;\s*)students=([^;]*)/);
+    if (!match) return [];
+
+    try {
+        return JSON.parse(decodeURIComponent(match[1]));
+    } catch (error) {
+        // Если cookie повредили вручную, главная страница должна открываться без падения.
+        console.log(error);
+        return [];
+    }
+}

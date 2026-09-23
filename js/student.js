@@ -5,11 +5,7 @@ console.log(id);
 
 let students = [];
 
-if (document.cookie.includes("students=")){
-    const cookiesData = document.cookie.split("students=")[1];
-    const decodedData = decodeURIComponent(cookiesData);
-    students = JSON.parse(decodedData);
-}
+students = getStudentsFromCookie();
 
 console.log(students);
 
@@ -18,39 +14,47 @@ const student = students.find(function(student){
 })
 
 const table = document.getElementById("student-info-table");
-table.innerHTML = ""
-table.innerHTML = `
-    <tr>
-        <td>ФИО</td>
-        <td>${student.fullName}</td>
-    </tr>
-    <tr>
-        <td>Группа</td>
-        <td>${student.group}</td>
-    </tr>
-    <tr>
-        <td>ИСУ</td>
-        <td>${student.ISU}</td>
-    </tr>
-    <tr>
-        <td>Общежитие</td>
-        <td>${student.numberHouse}</td>
-    </tr>
-    <tr>
-        <td>Комната</td>
-        <td>${student.numberRoom}</td>
-    </tr>
-    <tr>
-        <td>Дата заселения</td>
-        <td>${student.date}</td>
-    </tr>
-    <tr>
-        <td>Иностранец</td>
-        <td>${student.inostran ? "Да" : "Нет"}</td>
-    </tr>
-    <tr>
-        <td>Заметки</td>
-        <td>${student.note}</td>
-    </tr>
+table.textContent = "";
 
-`
+if (!student) {
+    const row = document.createElement("tr");
+    const messageCell = document.createElement("td");
+
+    messageCell.colSpan = 2;
+    messageCell.textContent = "Студент не найден";
+    row.append(messageCell);
+    table.append(row);
+} else {
+    addInfoRow("ФИО", student.fullName);
+    addInfoRow("Группа", student.group);
+    addInfoRow("ИСУ", student.ISU);
+    addInfoRow("Общежитие", student.numberHouse);
+    addInfoRow("Комната", student.numberRoom);
+    addInfoRow("Дата заселения", student.date);
+    addInfoRow("Иностранец", student.inostran ? "Да" : "Нет");
+    addInfoRow("Заметки", student.note);
+}
+
+function addInfoRow(type, value) {
+    const row = document.createElement("tr");
+    const typeCell = document.createElement("td");
+    const valueCell = document.createElement("td");
+
+    typeCell.textContent = type;
+    valueCell.textContent = value;
+    row.append(typeCell, valueCell);
+    table.append(row);
+}
+
+function getStudentsFromCookie() {
+    const match = document.cookie.match(/(?:^|;\s*)students=([^;]*)/);
+    if (!match) return [];
+
+    try {
+        return JSON.parse(decodeURIComponent(match[1]));
+    } catch (error) {
+        // Если cookie повредили вручную, страница подробностей должна показать пустой результат.
+        console.log(error);
+        return [];
+    }
+}
