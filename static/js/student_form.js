@@ -78,6 +78,6 @@ form.addEventListener("submit", function(event) {
     const data = encodeURIComponent(JSON.stringify(students));
     document.cookie = `students=${data}`;
 
-    window.location.href = "index.html";
+    window.location.href =  "{% url 'index' %}";
 
 });

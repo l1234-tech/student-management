@@ -65,6 +65,7 @@ infoButtons.forEach(function(button){
 
 const addButton = document.querySelector(".add-button");
 
-addButton.addEventListener("click",function(){
-    window.location.href = "student_form.html";
-});
+addButton.addEventListener('click', function () {
+        window.location.href = addButton.dataset.url;
+    })
+
