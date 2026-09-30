@@ -46,6 +46,64 @@ body {
     background-color: #3a79bc;
 }
 
+.filter-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2vh 1vw;
+    margin: 1.5vh 0.8vw;
+    padding: 1.4vh 1vw;
+    background: #f6f8fb;
+    border: 0.05vw solid #d9e1ec;
+    border-radius: 0.7vw;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.filter-group label {
+    margin-bottom: 0.4vh;
+    font-size: 0.95vw;
+    color: #333333;
+}
+
+.filter-group input,
+.filter-group select {
+    width: 100%;
+    padding: 0.8vh 0.6vw;
+    border: 0.05vw solid #ccc;
+    border-radius: 0.25vw;
+    font-size: 0.95vw;
+    background: white;
+}
+
+.filter-button,
+.reset-button {
+    border: none;
+    border-radius: 0.45vw;
+    color: white;
+    padding: 1vh 0.8vw;
+    font-size: 0.95vw;
+    cursor: pointer;
+}
+
+.filter-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    margin: 0;
+}
+
+.filter-button {
+    background-color: #3a79bc;
+}
+
+.reset-button {
+    background-color: #777777;
+}
+
 .table {
     table-layout: auto;
     width: 100%;
@@ -65,6 +123,7 @@ td {
     padding: 0.7vh 0.5vw;
     text-align: left;
     font-size: 0.95vw;
+    overflow-wrap: anywhere;
 }
 
 div {
@@ -203,6 +262,19 @@ div {
         width: auto;
     }
 
+    .filter-form {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: end;
+    }
+
+    .filter-group {
+        width: auto;
+    }
+
+    .filter-actions {
+        flex-direction: row;
+    }
+
     .nav-link {
         font-size: 1.3vw;
         padding: 0.7vh 0.8vw;
@@ -257,6 +329,14 @@ div {
         max-width: 85vw;
         margin: 0 auto;
         flex-direction: row;
+    }
+
+    .filter-form {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .filter-actions {
+        grid-column: span 2;
     }
 
     .nav-link {

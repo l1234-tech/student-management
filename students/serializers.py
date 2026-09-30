@@ -9,10 +9,9 @@ GROUP_RE = re.compile(r"^[A-Za-zА-Яа-яЁё]\d{4,5}$")
 
 
 class StudentSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
 
     ISU = serializers.IntegerField()
-    full_name = serializers.CharField(max_length=200)
+    name = serializers.CharField(max_length=200)
     group = serializers.CharField(max_length=20)
     dormitory = serializers.IntegerField()
     room = serializers.IntegerField()
@@ -39,18 +38,18 @@ class StudentSerializer(serializers.Serializer):
     def validate(self, attrs):
         errors = {}
         if not self.partial:
-            required = ("ISU", "full_name", "group",
+            required = ("ISU", "name", "group",
                         "dormitory", "room", "checkin_date", "is_foreign")
             for field in required:
                 if field not in attrs:
                     errors[field] = "Обязательное поле"
 
-        if "full_name" in attrs:
-            value = str(attrs["full_name"]).strip()
+        if "name" in attrs:
+            value = str(attrs["name"]).strip()
             if not FULL_NAME_RE.match(value):
-                errors["full_name"] = "ФИО должно состоять только из букв"
+                errors["name"] = "ФИО должно состоять только из букв"
             else:
-                attrs["full_name"] = value
+                attrs["name"] = value
 
         if "group" in attrs:
             value = str(attrs["group"])
@@ -90,18 +89,6 @@ class StudentSerializer(serializers.Serializer):
         return attrs
     
     def validate_ISU(self, value):
-        from . import services
-
         if isinstance(value, bool) or not isinstance(value, int):
             raise serializers.ValidationError("ИСУ должно быть целым числом")
-
-        current_isu = None
-        if self.instance is not None:
-            current_isu = self.instance.get("ISU")
-
-        existing = services.find_student_by_isu(value)
-        if existing and existing.get("ISU") != current_isu:
-            raise serializers.ValidationError(
-                "Студент с таким ИСУ уже существует"
-            )
         return value

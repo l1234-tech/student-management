@@ -34,6 +34,40 @@
                     Добавить нового студента
                 </button>
             </div>
+            <form id="filter-form" class="filter-form">
+                <div class="filter-group">
+                    <label for="filter-isu">ИСУ</label>
+                    <input id="filter-isu" name="ISU" type="number" min="100000" max="999999">
+                </div>
+                <div class="filter-group">
+                    <label for="filter-name">ФИО</label>
+                    <input id="filter-name" name="name" type="text">
+                </div>
+                <div class="filter-group">
+                    <label for="filter-group">Группа</label>
+                    <input id="filter-group" name="group" type="text">
+                </div>
+                <div class="filter-group">
+                    <label for="filter-dormitory">Общежитие</label>
+                    <input id="filter-dormitory" name="dormitory" type="number" min="1" max="20">
+                </div>
+                <div class="filter-group">
+                    <label for="filter-room">Комната</label>
+                    <input id="filter-room" name="room" type="number" min="1000" max="9999">
+                </div>
+                <div class="filter-group">
+                    <label for="filter-foreign">Иностранец</label>
+                    <select id="filter-foreign" name="is_foreign">
+                        <option value="">Любой</option>
+                        <option value="true">Да</option>
+                        <option value="false">Нет</option>
+                    </select>
+                </div>
+                <div class="filter-actions">
+                    <button type="submit" class="filter-button">Найти</button>
+                    <button type="reset" class="reset-button">Сбросить</button>
+                </div>
+            </form>
             <div>
                 <table class="table">
                     <thead>

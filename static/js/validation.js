@@ -5,12 +5,15 @@ function validate() {
     const numberHouse = document.getElementById('number-house').value.trim();
     const numberRoom = document.getElementById('number-room').value.trim();
     const date = document.getElementById('date').value.trim();
-    const params = new URLSearchParams(window.location.search);
-    const editId = Number(params.get('id'));
     clearErrors();
 
     if (!/^[a-zA-Zа-яА-ЯёЁ\s]+$/.test(full_name)) {
         showError('full-name', 'ФИО должно состоять только из букв');
+        return false;
+    }
+
+    if (full_name.length > 60) {
+        showError('full-name', 'ФИО должно быть не длиннее 60 символов');
         return false;
     }
 
@@ -36,18 +39,6 @@ function validate() {
         return false;
     }
 
-    const students = getStudentsFromCookie();
-    const isuNumber = Number(ISU);
-    const sameIsuStudent = students.find(function(student) {
-        return Number(student.ISU) === isuNumber && Number(student.id) !== editId;
-    });
-
-    if (sameIsuStudent) {
-        showError('ISU', 'Студент с таким ИСУ уже существует');
-        return false;
-    }
-
-
     const settlementDate = new Date(date);
     if (!date || Number.isNaN(settlementDate.getTime())) {
         showError('date', 'Введите корректную дату заселения');
@@ -66,19 +57,6 @@ function validate() {
     }
 
     return true;
-}
-
-function getStudentsFromCookie() {
-    const match = document.cookie.match(/(?:^|;\s*)students=([^;]*)/);
-    if (!match) return [];
-
-    try {
-        return JSON.parse(decodeURIComponent(match[1]));
-    } catch (error) {
-        // Если cookie повредили вручную, форма не должна падать при валидации.
-        console.log(error);
-        return [];
-    }
 }
 
 function showError(fieldId, message) {

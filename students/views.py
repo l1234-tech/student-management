@@ -13,6 +13,10 @@ def index(request):
 def student_form(request):
     return render(request, 'students/student_form.html')
 
+def student_detail_page(request):
+    return render(request, 'students/student.html')
+
+
 
 @api_view(['GET', 'POST', 'QUERY'])
 def api_requests(request):
@@ -40,8 +44,11 @@ def api_request_detail(request, ISU: int):
         return Response({'data': student})
 
     if request.method == 'PATCH':
-        student = services.update_student(ISU, request.data)
-        return Response({'data': student})
+        student = services.get_student(ISU)
+        serializer = StudentSerializer(student, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        updated_student = services.update_student(ISU, serializer.validated_data)
+        return Response({'data': updated_student})
 
     if request.method == 'DELETE':
         services.delete_student(ISU)

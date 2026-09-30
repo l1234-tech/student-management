@@ -1,10 +1,7 @@
-import re
-from datetime import date
- 
 from .errors import BadRequest, ConflictError, NotFound
 from .repository import StudentRepository
  
-FILTER_FIELDS = ("ISU", "group", "dormitory", "room", "is_foreign")
+FILTER_FIELDS = ("ISU", "name", "group", "dormitory", "room", "is_foreign")
 NUMERIC_FILTERS = ("ISU", "dormitory", "room")
 
 repo = StudentRepository()
@@ -22,7 +19,7 @@ def list_students(filters: dict) -> list[dict]:
                 raise BadRequest(f"{key}: должно быть целым числом")
         if key == "is_foreign":
             value = str(value).lower() in ("true", "1", "yes")
-        students = [s for s in students if s[key] == value]
+        students = [s for s in students if s.get(key) == value]
     return students
 
 

@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "ISU": 123454,
+    "name": "Артем Артемов",
+    "group": "Д2121",
+    "dormitory": 2,
+    "room": 1000,
+    "checkin_date": "2023-03-03",
+    "is_foreign": true,
+    "note": "тест"
+  },
+  {
+    "ISU": 123456,
+    "name": "Андрей Андреев",
+    "group": "Ь2312",
+    "dormitory": 3,
+    "room": 1110,
+    "checkin_date": "2025-02-04",
+    "is_foreign": true,
+    "note": "тест"
+  },
+  {
+    "ISU": 123455,
+    "name": "авыавы аывавывыаыавыав",
+    "group": "п2319",
+    "dormitory": 4,
+    "room": 1232,
+    "checkin_date": "2024-12-31",
+    "is_foreign": false,
+    "note": "тест(получиться ли создать с одиннаковым ису)"
+  }
+]

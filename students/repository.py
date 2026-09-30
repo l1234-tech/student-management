@@ -21,7 +21,7 @@ class StudentRepository():
         data = self.get_all()
         
         for student in data:
-            if student["ISU"] == student_id:
+            if student.get("ISU") == student_id:
                 return student
 
         return None
@@ -35,7 +35,7 @@ class StudentRepository():
     def update(self, student_id: int, fields: dict) -> dict | None:
         data = self.get_all()
         for i, student in enumerate(data):
-            if student["ISU"] == student_id:
+            if student.get("ISU") == student_id:
                 data[i] = {**student, **fields}
                 self.save(data)
                 return data[i]
@@ -46,7 +46,7 @@ class StudentRepository():
         data = self.get_all()
 
         if self.get_by_id(student_id):
-            remaining = [student for student in data if student["ISU"] != student_id]
+            remaining = [student for student in data if student.get("ISU") != student_id]
             self.save(remaining)
             return True
 

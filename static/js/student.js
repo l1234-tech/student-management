@@ -1,38 +1,50 @@
 const params = new URLSearchParams(window.location.search);
 const id = Number(params.get("id"));
 
-console.log(id);
-
-let students = [];
-
-students = getStudentsFromCookie();
-
-console.log(students);
-
-const student = students.find(function(student){
-    return student.id == id;
-})
-
 const table = document.getElementById("student-info-table");
 table.textContent = "";
 
-if (!student) {
+if (!params.has("id") || Number.isNaN(id)) {
+    showNotFound("Некорректный ИСУ студента");
+} else {
+    loadStudent(id);
+}
+
+async function loadStudent(ISU) {
+    const response = await fetch(`/api/requests/${ISU}`);
+    const result = await response.json();
+
+    if (!response.ok) {
+        showNotFound(result.error?.message || "Студент не найден");
+        return;
+    }
+
+    renderStudent(result.data);
+}
+
+function renderStudent(student) {
+    table.textContent = "";
+
+    addInfoRow("ФИО", student.name);
+    addInfoRow("Группа", student.group);
+    addInfoRow("ИСУ", student.ISU);
+    addInfoRow("Общежитие", student.dormitory);
+    addInfoRow("Комната", student.room);
+    addInfoRow("Дата заселения", student.checkin_date);
+    addInfoRow("Иностранец", student.is_foreign ? "Да" : "Нет");
+    addInfoRow("Заметки", student.note || "");
+}
+
+function showNotFound(message) {
+    table.textContent = "";
+
     const row = document.createElement("tr");
     const messageCell = document.createElement("td");
 
     messageCell.colSpan = 2;
-    messageCell.textContent = "Студент не найден";
+    messageCell.textContent = message;
     row.append(messageCell);
     table.append(row);
-} else {
-    addInfoRow("ФИО", student.fullName);
-    addInfoRow("Группа", student.group);
-    addInfoRow("ИСУ", student.ISU);
-    addInfoRow("Общежитие", student.numberHouse);
-    addInfoRow("Комната", student.numberRoom);
-    addInfoRow("Дата заселения", student.date);
-    addInfoRow("Иностранец", student.inostran ? "Да" : "Нет");
-    addInfoRow("Заметки", student.note);
 }
 
 function addInfoRow(type, value) {
@@ -44,17 +56,4 @@ function addInfoRow(type, value) {
     valueCell.textContent = value;
     row.append(typeCell, valueCell);
     table.append(row);
-}
-
-function getStudentsFromCookie() {
-    const match = document.cookie.match(/(?:^|;\s*)students=([^;]*)/);
-    if (!match) return [];
-
-    try {
-        return JSON.parse(decodeURIComponent(match[1]));
-    } catch (error) {
-        // Если cookie повредили вручную, страница подробностей должна показать пустой результат.
-        console.log(error);
-        return [];
-    }
 }

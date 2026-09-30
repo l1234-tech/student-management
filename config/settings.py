@@ -33,7 +33,7 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [],
-    # 'EXCEPTION_HANDLER': 'students.exceptions.custom_exception_handler',
+    'EXCEPTION_HANDLER': 'students.exceptions.custom_exception_handler',
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
