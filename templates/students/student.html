@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 
 <html lang="ru">
@@ -5,8 +6,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="images/favicon.jpg" type="image/jpeg">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="icon" href="static/images/favicon.jpg" type="image/jpg">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <title>
             Досье студента
         </title>
@@ -17,8 +18,8 @@
            <div class="nav-list">
                 <nav class="nav">
                     <ul  class="nav-list">
-                        <li><a class="nav-link" href="index.html">Главная</a></li>
-                        <li><a class="nav-link" href="student_form.html">Добавление студента</a></li>
+                        <a class="nav-link" href="{% url 'index' %}">Главная</a>
+                        <a class="nav-link" href="{% url 'student-form' %}">Добавление студента</a>
                     </ul>
                 </nav>
             </div>
@@ -51,6 +52,6 @@
         </footer>
 
 
-        <script src="js/student.js"></script>   
+        <script src="{% static 'js/student.js' %}"></script>
     </body>
 </html>

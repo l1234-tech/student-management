@@ -84,7 +84,7 @@ infoButtons.forEach(function(button){
 const addButton = document.querySelector(".add-button");
 
 addButton.addEventListener("click",function(){
-    window.location.href = "student_form.html";
+    window.location.href = addButton.dataset.url;
 });
 
 function getStudentsFromCookie() {
