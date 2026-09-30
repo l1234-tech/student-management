@@ -1,12 +1,1 @@
-[
-  {
-    "ISU": 323235,
-    "full_name": "Тестов Тест Тестович",
-    "group": "M3100",
-    "dormitory": 2,
-    "room": 1234,
-    "checkin_date": "2026-09-01",
-    "is_foreign": false,
-    "note": "тест"
-  }
-]
+[]
