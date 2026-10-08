@@ -1,11 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 
 <html lang="ru">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="images/favicon.jpg" type="image/jpg">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="icon" href="static/images/favicon.jpg" type="image/jpg">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <title>
             Форма для досье
         </title>
@@ -16,9 +17,8 @@
             <div class="nav-list">
                 <nav class="nav">
                     <ul  class="nav-list">
-                        <a class="nav-link" href="index.html">Главная</a>
-                        <a class="nav-link" href="student.html">Досье студента</a>
-                        <a class="nav-link" href="student_form.html">Изменение/добавление досье</a>
+                        <a class="nav-link" href="{% url 'index' %}">Главная</a>
+                        <a class="nav-link" href="{% url 'student-form' %}">Добавление студента</a>
                     </ul>
                 </nav>
             </div>
@@ -31,7 +31,7 @@
                     <input
                     id="full-name" 
                     type="text"
-                    name="full-name"
+                    maxlength="60"
                     placeholder="Введите ФИО"
                     required
                     >
@@ -42,6 +42,8 @@
                     id="group"
                     name="group"
                     type="text"
+                    pattern="[A-Za-zА-Яа-яЁё][0-9]{4,5}"
+                    title="Группа должна начинаться с буквы, затем 4-5 цифр"
                     placeholder="Введите группу"
                     required
                     >
@@ -50,9 +52,8 @@
                     <label for="ISU">ИСУ id:</label>
                     <input 
                     id="ISU"
-                    min="100_000"
-                    max="999_999"
-                    name="ISU"
+                    min="100000"
+                    max="999999"
                     type="number"
                     placeholder="Введите ИСУ id"
                     required
@@ -106,9 +107,7 @@
                     <label for="note">Заметки</label>
                     <textarea
                         id="note"
-                        name="note"
-                        placeholder="Введите описание">
-                    </textarea>
+                        placeholder="Введите описание"></textarea>
                 </div>
                 <button type="submit" class="submit-btn">
                     Подтвердить
@@ -120,6 +119,7 @@
         <footer class="site-footer">
             Веб программирование 2026
         </footer>
-        <script src="js/student_form.js"></script>
+        <script src="{% static 'js/student_form.js' %}"></script>
+        <script src="{% static 'js/validation.js' %}"></script>
     </body>
 </html>
