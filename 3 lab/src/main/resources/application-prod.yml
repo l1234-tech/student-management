@@ -1,0 +1,34 @@
+# Профиль продакшена (SPRING_PROFILES_ACTIVE=prod).
+#
+# Все обязательные значения берутся из переменных окружения (.env.example).
+# Схему БД приложение НЕ изменяет: её готовят заранее (миграции или выгруженный дамп).
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/student_management}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: ${DB_DRIVER:org.postgresql.Driver}
+
+  jpa:
+    show-sql: false
+    properties:
+      # Платформа EclipseLink для PostgreSQL (DDL в продакшене не выполняется, но платформа влияет и на SQL-диалект).
+      eclipselink.target-database: ${ECLIPSELINK_TARGET_DATABASE:org.eclipse.persistence.platform.database.PostgreSQLPlatform}
+      # В продакшене EclipseLink не трогает структуру таблиц.
+      eclipselink.ddl-generation: none
+      eclipselink.logging.level: WARNING
+
+  h2:
+    console:
+      enabled: false
+
+logging:
+  level:
+    root: info
+    dev.geeks.studentmanagement: info
+    org.hibernate: warn

@@ -1,0 +1,44 @@
+# Профиль разработки (SPRING_PROFILES_ACTIVE=dev, по умолчанию).
+#
+# По умолчанию используется H2 в памяти - приложение стартует без внешней БД.
+# Для перехода на локальный PostgreSQL достаточно задать в .env:
+#   DB_URL=jdbc:postgresql://localhost:5432/student_management
+#   DB_USERNAME=postgres
+#   DB_PASSWORD=postgres
+#   DB_DRIVER=org.postgresql.Driver
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    # MODE=LEGACY обязателен: EclipseLink 4.0.4 генерирует DDL в синтаксисе H2 1.x
+    # (BIGINT IDENTITY и CALL IDENTITY()), который H2 2.x принимает только в legacy-режиме.
+    url: ${DB_URL:jdbc:h2:mem:student_dev_db;MODE=LEGACY;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+    driver-class-name: ${DB_DRIVER:org.h2.Driver}
+
+  jpa:
+    show-sql: true
+    properties:
+      # Платформа нужна для корректного DDL: без неё EclipseLink генерирует синтаксис Derby (BIGINT IDENTITY),
+      # который H2 не принимает. При переходе dev на PostgreSQL задайте:
+      # ECLIPSELINK_TARGET_DATABASE=org.eclipse.persistence.platform.database.PostgreSQLPlatform
+      eclipselink.target-database: ${ECLIPSELINK_TARGET_DATABASE:org.eclipse.persistence.platform.database.H2Platform}
+      # Схема создаётся автоматически при старте - удобно для разработки.
+      eclipselink.ddl-generation: drop-and-create-tables
+      eclipselink.logging.level: FINE
+      eclipselink.logging.level.sql: FINE
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+logging:
+  level:
+    root: info
+    dev.geeks.studentmanagement: debug
+    org.hibernate: warn

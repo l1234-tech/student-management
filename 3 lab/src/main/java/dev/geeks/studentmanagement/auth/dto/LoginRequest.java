@@ -1,8 +1,13 @@
 package dev.geeks.studentmanagement.auth.dto;
 
-// DTO входа пользователя: username/email и пароль.
+import jakarta.validation.constraints.NotBlank;
+
+// DTO входа пользователя: username и пароль.
 public record LoginRequest(
+        @NotBlank(message = "username обязателен")
         String username,
+
+        @NotBlank(message = "password обязателен")
         String password
 ) {
 }

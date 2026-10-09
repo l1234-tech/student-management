@@ -1,5 +1,12 @@
-# Конфигурация Spring Boot приложения: порт, подключение к БД, JPA, JWT и логирование.
-# Значения берутся из переменных окружения, пример которых лежит в .env.example.
+# Базовая конфигурация Spring Boot: загружается всегда, при любых профилях.
+# Зависимые от окружения значения берутся из переменных окружения (см. .env.example).
+#
+# Связка профилей:
+#   application.yml       - общие настройки (порт, JWT, JPA/EclipseLink, логирование)
+#   application-dev.yml   - локальная разработка (H2 по умолчанию, можно переключиться на PostgreSQL)
+#   application-prod.yml  - продакшн (PostgreSQL, без автосоздания схемы)
+#
+# Профиль выбирается через SPRING_PROFILES_ACTIVE, по умолчанию - dev.
 
 server:
   port: ${SERVER_PORT:8080}
@@ -7,22 +14,28 @@ server:
 spring:
   application:
     name: student-management
-  datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/student_management}
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:postgres}
+
+  # Профиль по умолчанию: dev. Переопределяется переменной окружения SPRING_PROFILES_ACTIVE.
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
   jpa:
     open-in-view: false
     show-sql: false
-    hibernate:
-      ddl-auto: validate
+    # Провайдер JPA - EclipseLink, Hibernate из spring-boot-starter-data-jpa не используется.
     properties:
       jakarta.persistence.provider: org.eclipse.persistence.jpa.PersistenceProvider
+      # Схема БД задаётся в профилях: dev - eclipselink.ddl-generation, prod - none.
+      eclipselink.target-server: None
+      # Без общего кэша сущностей: REST-клиент всегда видит актуальные данные из БД.
+      eclipselink.cache.shared.default: false
 
+# Настройки JWT (используются JwtService из модуля security).
 app:
   jwt:
-    access-secret: ${JWT_ACCESS_SECRET:change-me-access-secret}
-    refresh-secret: ${JWT_REFRESH_SECRET:change-me-refresh-secret}
+    # Секреты должны быть не короче 32 байт: jjwt 0.12 не принимает короткие HMAC-ключи.
+    access-secret: ${JWT_ACCESS_SECRET:dev-access-secret-0123456789abcdefghijklmnop}
+    refresh-secret: ${JWT_REFRESH_SECRET:dev-refresh-secret-0123456789abcdefghijklmnopq}
     access-ttl-minutes: ${JWT_ACCESS_TTL_MINUTES:15}
     refresh-ttl-days: ${JWT_REFRESH_TTL_DAYS:30}
 

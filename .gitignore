@@ -29,6 +29,8 @@ Thumbs.db
 dist/
 build/
 tmp/
+target/
+**/target/
 node_modules/
 venv/
 .venv/
