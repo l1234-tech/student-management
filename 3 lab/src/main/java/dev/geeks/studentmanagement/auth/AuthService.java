@@ -14,6 +14,17 @@ import dev.geeks.studentmanagement.auth.repository.UserRepository;
 import dev.geeks.studentmanagement.common.exception.ConflictException;
 import dev.geeks.studentmanagement.security.JwtService;
 
+// =============================================================================
+// Компонент:   AuthService
+// Модуль:      dev.geeks.studentmanagement.auth
+// Назначение:  бизнес-логика регистрации, входа и обновления токенов.
+// Функции:     проверка уникальности username/email; BCrypt-хэш пароля;
+//              выдача пары access/refresh; роль ADMIN — только первому
+//              пользователю системы.
+// Зависимости: UserRepository, PasswordEncoder, JwtService.
+// Статус: реализовано.
+// =============================================================================
+
 // Сервис авторизации: регистрация, вход, обновление токена.
 // Пароль хранится только в виде BCrypt-хэша, наружу пароль не возвращается никогда.
 @Service

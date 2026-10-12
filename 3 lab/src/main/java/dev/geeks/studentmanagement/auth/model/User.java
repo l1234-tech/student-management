@@ -10,6 +10,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
+// =============================================================================
+// Компонент:   User (JPA entity)
+// Модуль:      dev.geeks.studentmanagement.auth.model
+// Назначение:  модель пользователя, таблица users.
+// Поля:        id, username, email, password_hash, role.
+// Ограничения: уникальность username и email; пароль хранится
+//              только как BCrypt-хэш.
+// Статус: реализовано.
+// =============================================================================
+
 // JPA entity пользователя: username, email, passwordHash, role.
 // Пароль хранится только как hash (BCrypt), в открытом виде его в БД нет.
 @Entity

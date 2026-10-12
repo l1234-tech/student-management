@@ -16,6 +16,16 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
+// =============================================================================
+// Компонент:   JwtService
+// Модуль:      dev.geeks.studentmanagement.security
+// Назначение:  создание и проверка JWT (jjwt 0.12.x).
+// Функции:     генерация access/refresh токенов с разными секретами;
+//              проверка подписи, срока действия и типа токена;
+//              извлечение username и роли из claims.
+// Статус: реализовано.
+// =============================================================================
+
 // Сервис JWT (jjwt 0.12.x): создание access/refresh токенов, проверка подписи и срока,
 // чтение username и роли из claims. Access и refresh подписаны разными секретами,
 // а claim "type" не даёт использовать access-токен как refresh-токен и наоборот.

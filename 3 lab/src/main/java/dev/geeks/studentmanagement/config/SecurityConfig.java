@@ -24,6 +24,17 @@ import dev.geeks.studentmanagement.security.JwtAuthenticationFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+// =============================================================================
+// Компонент:   SecurityConfig
+// Модуль:      dev.geeks.studentmanagement.config
+// Назначение:  политика безопасности Spring Security (stateless, JWT).
+// Функции:     публичные маршруты (/api/auth/**, Swagger, H2-console);
+//              чтение /api/requests/** — USER и ADMIN, изменение — только ADMIN;
+//              ответы 401/403 в формате ApiError; BCrypt-кодировщик;
+//              подключение JwtAuthenticationFilter.
+// Статус: реализовано.
+// =============================================================================
+
 // Spring Security: stateless, JWT-фильтр, публичные auth/swagger endpoints и доступ по ролям.
 // Разграничение прав выполняется ТОЛЬКО здесь, на backend: USER читает /api/requests/**,
 // ADMIN может создавать, изменять и удалять.

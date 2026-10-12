@@ -5,6 +5,16 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+// =============================================================================
+// Компонент:   RegisterRequest (record)
+// Модуль:      dev.geeks.studentmanagement.auth.dto
+// Назначение:  входной DTO запроса POST /api/auth/register.
+// Поля:        username (3–100), email (валидный, ≤255), password (8–72),
+//              role (необязательно: по умолчанию USER, ADMIN — только первому
+//              пользователю системы).
+// Статус: реализовано.
+// =============================================================================
+
 // DTO регистрации пользователя: username, email, password и необязательная роль.
 // role по умолчанию USER; ADMIN может получить только первый пользователь системы (см. AuthService).
 public record RegisterRequest(

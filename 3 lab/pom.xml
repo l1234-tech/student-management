@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Maven-конфигурация Spring Boot проекта: здесь подключаются Web, Security, JPA, validation, OpenAPI и драйвер БД. -->
+<!-- =============================================================================
+     Файл:      pom.xml
+     Назначение: сборка Maven проекта student-management (Spring Boot 3.3.4, Java 17).
+     Содержит:   web, security, data-jpa, validation, EclipseLink, PostgreSQL, H2,
+                 jjwt 0.12.6, springdoc-openapi, тесты.
+     Статус: реализовано.
+     ============================================================================= -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">

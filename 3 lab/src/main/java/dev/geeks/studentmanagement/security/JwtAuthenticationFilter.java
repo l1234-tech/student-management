@@ -20,6 +20,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+// =============================================================================
+// Компонент:   JwtAuthenticationFilter
+// Модуль:      dev.geeks.studentmanagement.security
+// Назначение:  JWT-фильтр аутентификации запросов (stateless).
+// Функции:     извлечение access-токена из заголовка Authorization;
+//              проверка токена и установка SecurityContext с ролью ROLE_*;
+//              битый токен не прерывает запрос (401 вернёт SecurityConfig).
+// Статус: реализовано.
+// =============================================================================
+
 // Фильтр безопасности: читает Authorization: Bearer <token>, проверяет access token
 // и авторизует пользователя в SecurityContext. Работает до SecurityConfig-цепочки
 // (addFilterBefore UsernamePasswordAuthenticationFilter) и stateless, сессия не используется.

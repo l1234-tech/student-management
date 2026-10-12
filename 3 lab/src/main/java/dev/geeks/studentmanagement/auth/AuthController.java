@@ -24,7 +24,24 @@ import dev.geeks.studentmanagement.common.exception.ConflictException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+// =============================================================================
+// Компонент:   AuthController
+// Модуль:      dev.geeks.studentmanagement.auth
+// Назначение:  REST-контроллер аутентификации.
+// Маршруты:    POST /api/auth/register (201), /api/auth/login (200),
+//              /api/auth/refresh (200).
+// Обработка:   ошибки в едином формате ApiError — 409, 401, 422.
+// Зависимости: AuthService, DTO авторизации, ApiError.
+// Статус: реализовано.
+// =============================================================================
+
 // REST controller авторизации: регистрация, вход, обновление токена.
+@Tag(name = "Auth", description = "JWT-авторизация: регистрация, вход, обновление токенов")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -36,6 +53,13 @@ public class AuthController {
     }
 
     // 201: пользователь создан, возвращены access и refresh токены.
+    @Operation(summary = "Регистрация пользователя",
+            description = "Создаёт пользователя и выдаёт пару access/refresh токенов. Роль ADMIN доступна только первому пользователю системы.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Пользователь создан, возвращены токены"),
+            @ApiResponse(responseCode = "409", description = "Username или email уже заняты"),
+            @ApiResponse(responseCode = "422", description = "Ошибка валидации входных данных")
+    })
     @PostMapping("/register")
     public ResponseEntity<TokenResponse> register(@Valid @RequestBody RegisterRequest request) {
         TokenResponse tokens = authService.register(request);
@@ -43,12 +67,26 @@ public class AuthController {
     }
 
     // 200: логин и пароль проверены, возвращены access и refresh токены.
+    @Operation(summary = "Вход по логину и паролю",
+            description = "Проверяет учётные данные и возвращает пару access/refresh токенов.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Учётные данные подтверждены, возвращены токены"),
+            @ApiResponse(responseCode = "401", description = "Неверный логин или пароль"),
+            @ApiResponse(responseCode = "422", description = "Ошибка валидации входных данных")
+    })
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }
 
     // 200: refresh-токен проверен, выдан новый access-токен (и новый refresh-токен).
+    @Operation(summary = "Обновление токенов",
+            description = "Проверяет refresh-токен и выдаёт новую пару access/refresh токенов.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Токены обновлены"),
+            @ApiResponse(responseCode = "401", description = "Недействительный или просроченный refresh-токен"),
+            @ApiResponse(responseCode = "422", description = "Ошибка валидации входных данных")
+    })
     @PostMapping("/refresh")
     public ResponseEntity<TokenResponse> refresh(@Valid @RequestBody RefreshTokenRequest request) {
         return ResponseEntity.ok(authService.refresh(request.refreshToken()));

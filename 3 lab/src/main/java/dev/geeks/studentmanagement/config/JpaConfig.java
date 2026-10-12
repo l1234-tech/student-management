@@ -17,6 +17,16 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import jakarta.persistence.EntityManagerFactory;
 
+// =============================================================================
+// Компонент:   JpaConfig
+// Модуль:      dev.geeks.studentmanagement.config
+// Назначение:  настройка JPA на EclipseLink вместо Hibernate по умолчанию.
+// Функции:     создание EntityManagerFactory и TransactionManager;
+//              перенос свойств spring.jpa.* в EclipseLink, обработка show-sql.
+// Источник свойств: application.yml, application-dev.yml, application-prod.yml.
+// Статус: реализовано.
+// =============================================================================
+
 // Конфигурация JPA для варианта Spring Boot + EclipseLink.
 // Spring Boot по умолчанию поднимает Hibernate; здесь явно создаётся EntityManagerFactory
 // на EclipseLink, чтобы variant лабораторной выполнялся: провайдер, DDL и логирование БД
