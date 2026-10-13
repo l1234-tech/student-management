@@ -1,0 +1,35 @@
+# Системные файлы
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Логи и базы данных
+*.log
+*.sqlite
+*.db
+
+# Настройки среды и секреты
+.env
+.env.local
+.env.*.local
+
+# Папки редакторов и IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# Временные файлы и папки сборки
+dist/
+build/
+tmp/
+node_modules/
+venv/
+.venv/
+__pycache__
