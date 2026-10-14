@@ -1,3 +1,59 @@
-<!-- Шаблон досье студента для Spring Boot. Название файла сохранено из лабораторной 1-2. -->
-<!-- TODO: Перенести таблицу подробной информации о студенте. -->
-<!-- TODO: Подключить student.js для загрузки данных через API. -->
+<!DOCTYPE html>
+
+<html lang="ru">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/images/favicon.jpg" type="image/jpg">
+        <link rel="stylesheet" href="/css/style.css">
+        <title>
+            Досье студента
+        </title>
+    </head>
+    <body>
+<div class="account-bar"><span id="account-name"></span><button id="logout-button">Выйти</button></div>
+<div id="page-error" role="alert"></div>
+
+        <main>
+           <div class="nav-list">
+                <nav class="nav">
+                    <ul  class="nav-list">
+                        <a class="nav-link" href="/">Главная</a>
+                        <a class="nav-link" data-admin href="/add-student/">Добавление студента</a>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <header>
+                    <h1>
+                        Информация о студенте
+                    </h1>
+                </header>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Тип</th>
+                            <th>Значение</th>
+                        </tr>
+                    </thead>
+                    <tbody
+                        id="student-info-table">
+                    </tbody>
+                </table>
+            </div>
+
+
+        </main>
+
+        <footer class="site-footer">
+            Веб программирование 2026
+        </footer>
+
+
+        <script src="/js/auth.js"></script>
+        <script src="/js/student.js"></script>
+    </body>
+</html>

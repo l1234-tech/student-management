@@ -1,9 +1,16 @@
 package dev.geeks.studentmanagement.auth.dto;
 
-// DTO регистрации пользователя. Здесь нужны username, email, password и роль при необходимости.
+import jakarta.validation.constraints.*;
+
 public record RegisterRequest(
-        String username,
-        String email,
-        String password
+    @NotBlank
+    @Pattern(regexp = "[A-Za-z0-9_]{3,50}")
+    String username,
+
+    @NotBlank @Email @Size(max = 254)
+    String email,
+
+    @NotBlank @Size(min = 8, max = 72)
+    String password
 ) {
 }

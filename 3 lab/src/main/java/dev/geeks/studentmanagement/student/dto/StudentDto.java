@@ -7,8 +7,8 @@ public record StudentDto(
         String group,
         Integer dormitory,
         Integer room,
-        String checkinDate,
-        Boolean isForeign,
+        @com.fasterxml.jackson.annotation.JsonProperty("checkin_date") @com.fasterxml.jackson.annotation.JsonAlias("checkinDate") String checkinDate,
+        @com.fasterxml.jackson.annotation.JsonProperty("is_foreign") @com.fasterxml.jackson.annotation.JsonAlias("isForeign") Boolean isForeign,
         String note
 ) {
 }

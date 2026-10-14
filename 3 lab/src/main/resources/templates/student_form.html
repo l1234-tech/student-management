@@ -1,3 +1,122 @@
-<!-- Шаблон формы студента для Spring Boot. Название файла сохранено по смыслу из лабораторной 1-2. -->
-<!-- TODO: Перенести форму добавления/редактирования студента. -->
-<!-- TODO: Добавить поля модели студента и подключить student_form.js + validation.js. -->
+<!DOCTYPE html>
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/images/favicon.jpg" type="image/jpg">
+        <link rel="stylesheet" href="/css/style.css">
+        <title>
+            Форма для досье
+        </title>
+    </head>
+
+    <body>
+<div class="account-bar"><span id="account-name"></span><button id="logout-button">Выйти</button></div>
+<div id="page-error" role="alert"></div>
+        <main>
+            <div class="nav-list">
+                <nav class="nav">
+                    <ul  class="nav-list">
+                        <a class="nav-link" href="/">Главная</a>
+                        <a class="nav-link" data-admin href="/add-student/">Добавление студента</a>
+                    </ul>
+                </nav>
+            </div>
+            <form id="UserForm" class="main-form">
+                <h2>
+                    Форма записи
+                </h2>
+                <div class="form-group">
+                    <label for="full-name">ФИО студента:</label>
+                    <input
+                    id="full-name"
+                    type="text"
+                    maxlength="60"
+                    placeholder="Иванов Иван Иванович"
+                    required
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="group">Группа:</label>
+                    <input
+                    id="group"
+                    type="text"
+                    pattern="[A-Za-zА-Яа-яЁё][0-9]{4,5}"
+                    title="Группа должна начинаться с буквы, затем 4-5 цифр"
+                    placeholder="Введите группу"
+                    required
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="ISU">ИСУ id:</label>
+                    <input
+                    id="ISU"
+                    min="100000"
+                    max="999999"
+                    type="number"
+                    placeholder="Введите ИСУ id"
+                    required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="number-house">Номер общежития:</label>
+                    <input
+                    id="number-house"
+                    min="1"
+                    max="20"
+                    type="number"
+                    placeholder="Введите номер общежития"
+                    required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="number-room">Комната:</label>
+                    <input
+                    id="number-room"
+                    min="1000"
+                    max="9999"
+                    type="number"
+                    placeholder="Введите номер комнаты"
+                    required
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="date">Срок заселения:</label>
+                    <input
+                    id="date"
+                    type="date"
+                    placeholder="Введите срок заселения"
+                    required
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="inostran">Является ли студент иностранцем?</label>
+                    <input
+                    id="inostran"
+                    type="checkbox"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="note">Заметки</label>
+                    <textarea
+                        id="note" maxlength="2000"
+                        placeholder="Введите описание"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    Подтвердить
+                </button>
+            </form>
+
+
+        </main>
+        <footer class="site-footer">
+            Веб программирование 2026
+        </footer>
+        <script src="/js/auth.js"></script>
+        <script src="/js/student_form.js"></script>
+        <script src="/js/validation.js"></script>
+    </body>
+</html>

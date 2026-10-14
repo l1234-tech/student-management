@@ -1,6 +1,6 @@
 # 🏠 Student Management · Веб-программирование
 
-**Стек:** HTML · CSS · JavaScript · Python · Django REST Framework
+**Стек:** HTML · CSS · JavaScript · Python/Django (лабы 1–2) · Java/Spring Boot · EclipseLink/JPA · PostgreSQL (лаба 3)
 
 ```mermaid
 flowchart LR
@@ -25,7 +25,7 @@ flowchart LR
 | --- | --- | --- |
 | Лабораторная 1 | HTML/CSS/JS, CRUD, cookies, валидация | Реализация в `1-2 lab/` |
 | Лабораторная 2 | Django + DRF, REST API, JSON-хранилище | Реализация в `1-2 lab/` |
-| Лабораторная 3 | Spring Boot, JPA, JWT и роли | Заготовка в `3 lab/` |
+| Лабораторная 3 | Spring Boot + EclipseLink/JPA + PostgreSQL, JWT и роли | Реализация и тесты в `3 lab/` |
 
 ## Запуск лабораторных 1–2
 
@@ -40,6 +40,19 @@ python manage.py runserver
 Это учебный стенд с режимом отладки. Для публичного развёртывания нужны отдельные настройки безопасности. Django-ключ для локального запуска генерируется при старте, либо задаётся через переменную `DJANGO_SECRET_KEY`; встроенный ключ источника удалён из этой копии.
 
 Перенесено из [geek-masters/web2026-geeks](https://sourcecraft.dev/geek-masters/web2026-geeks). [Исходное описание](docs/source-readme.md) сохранено, включая сведения о командном проекте.
+
+## Запуск лабораторной 3
+
+Установите JDK 17, Maven и PostgreSQL. Создайте базу `student_management`, затем в PowerShell:
+
+```powershell
+cd "3 lab"
+powershell -ExecutionPolicy Bypass -File .\start.ps1
+```
+
+Скрипт спросит пароль PostgreSQL и данные администратора. Сайт: [localhost:8080](http://localhost:8080/).
+
+**[Полная инструкция лабораторной 3](3%20lab/README.md)**: установка, запуск, настройки, архитектура, валидация, REST API, JWT, роли, Swagger/Postman и тесты.
 
 ## Материалы курса
 

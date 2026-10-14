@@ -1,5 +1,75 @@
-// Файл сохранён с тем же названием, что и в лабораторной 1-2.
-// Здесь нужно отправлять POST/PUT/PATCH запросы к Spring Boot API.
-// TODO: Для создания использовать POST /api/requests.
-// TODO: Для редактирования использовать PATCH или PUT /api/requests/{ISU}.
-// TODO: Добавить JWT access token в заголовок Authorization.
+const params = new URLSearchParams(window.location.search);
+const editId = Number(params.get("id"));
+const hasEditId = params.has("id") && !Number.isNaN(editId);
+
+if (hasEditId) {
+    document.getElementById("ISU").disabled = true;
+    loadStudent(editId);
+}
+
+const form = document.getElementById("UserForm");
+
+if (!isAdmin()) { form.hidden = true; showPageError("Изменять студентов может только администратор"); }
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    if (!validate()) {
+        return;
+    }
+
+    const student = {
+        name: document.getElementById("full-name").value.trim(),
+        group: document.getElementById("group").value.trim(),
+        ISU: Number(document.getElementById("ISU").value),
+        dormitory: Number(document.getElementById("number-house").value),
+        room: Number(document.getElementById("number-room").value),
+        checkin_date: document.getElementById("date").value,
+        is_foreign: document.getElementById("inostran").checked,
+        note: document.getElementById("note").value,
+    };
+
+    if (hasEditId) delete student.ISU;
+    const url = hasEditId ? `/api/requests/${editId}` : "/api/requests";
+    const method = hasEditId ? "PATCH" : "POST";
+
+    const response = await apiFetch(url, {
+        method: method,
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(student),
+    });
+
+    if (!response.ok) {
+        const result = await response.json();
+        showPageError((result.error?.message || "Ошибка сохранения студента") + "\n" + Object.values(result.error?.details || {}).join("\n"));
+        return;
+    }
+
+    window.location.href = "/";
+});
+
+async function loadStudent(ISU) {
+    const response = await apiFetch(`/api/requests/${ISU}`);
+    const result = await response.json();
+
+    if (!response.ok) {
+        alert(result.error?.message || "Студент для редактирования не найден");
+        window.location.href = "/";
+        return;
+    }
+
+    fillForm(result.data);
+}
+
+function fillForm(student) {
+    document.getElementById("full-name").value = student.name;
+    document.getElementById("group").value = student.group;
+    document.getElementById("ISU").value = student.ISU;
+    document.getElementById("number-house").value = student.dormitory;
+    document.getElementById("number-room").value = student.room;
+    document.getElementById("date").value = student.checkin_date;
+    document.getElementById("inostran").checked = student.is_foreign;
+    document.getElementById("note").value = student.note || "";
+}

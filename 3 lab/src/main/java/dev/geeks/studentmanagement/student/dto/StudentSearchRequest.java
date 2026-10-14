@@ -7,7 +7,7 @@ public record StudentSearchRequest(
         String group,
         Integer dormitory,
         Integer room,
-        Boolean isForeign,
+        @com.fasterxml.jackson.annotation.JsonProperty("is_foreign") @com.fasterxml.jackson.annotation.JsonAlias("isForeign") Boolean isForeign,
         String sort,
         Integer page,
         Integer size

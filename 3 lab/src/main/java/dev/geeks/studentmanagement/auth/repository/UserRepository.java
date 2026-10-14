@@ -1,7 +1,10 @@
 package dev.geeks.studentmanagement.auth.repository;
-
-// Repository для пользователей: поиск по username/email, проверка уникальности.
-public interface UserRepository {
-    // TODO: Наследоваться от JpaRepository<User, Long>.
-    // TODO: Добавить findByUsername, existsByUsername, existsByEmail.
+import dev.geeks.studentmanagement.auth.model.User;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface UserRepository extends JpaRepository<User,Long> {
+    Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
+    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
 }
