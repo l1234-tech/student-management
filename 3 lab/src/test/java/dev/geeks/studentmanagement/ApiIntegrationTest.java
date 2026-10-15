@@ -61,6 +61,12 @@ class ApiIntegrationTest {
         assertEquals("ADMIN",send(auth(get("/api/auth/me")),200).get("role").asText());
         send(auth(post("/api/requests").content(student(123456,1234))),201);
         send(auth(post("/api/requests").content(student(123456,1234))),409);
+        assertEquals(1,send(auth(get("/api/requests").param("group","  P1234  ").param("name","  Маша Иванова  ")),200).get("totalElements").asInt());
+        assertEquals(0,send(auth(get("/api/requests").param("group","   ")),200).get("totalElements").asInt());
+        assertEquals(0,send(auth(get("/api/requests").param("name","")),200).get("totalElements").asInt());
+        send(auth(patch("/api/requests/123456").content("{\"name\":\"  Маша Иванова  \",\"group\":\"  P1234  \"}")),200);
+        send(auth(patch("/api/requests/123456").content("{\"name\":\"   \"}")),422);
+
         send(auth(post("/api/requests").content(student(234567,1))),422);
         send(auth(post("/api/requests").content(student(234567,1234).replace("2026-09-01","2099-09-01"))),422);
         assertEquals(123456,send(auth(get("/api/requests/123456")),200).get("data").get("ISU").asInt());

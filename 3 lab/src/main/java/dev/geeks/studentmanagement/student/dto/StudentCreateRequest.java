@@ -31,4 +31,10 @@ public record StudentCreateRequest(
     @Size(max = 2000)
     String note
 ) {
+    public StudentCreateRequest {
+        name = name == null ? null : name.strip();
+        group = group == null ? null : group.strip();
+        checkinDate = checkinDate == null ? null : checkinDate.strip();
+        note = note == null ? null : note.strip();
+    }
 }

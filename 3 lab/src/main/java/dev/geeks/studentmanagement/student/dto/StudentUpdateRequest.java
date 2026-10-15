@@ -10,4 +10,10 @@ public record StudentUpdateRequest(
         @com.fasterxml.jackson.annotation.JsonProperty("is_foreign") @com.fasterxml.jackson.annotation.JsonAlias("isForeign") Boolean isForeign,
         String note
 ) {
+    public StudentUpdateRequest {
+        name = name == null ? null : name.strip();
+        group = group == null ? null : group.strip();
+        checkinDate = checkinDate == null ? null : checkinDate.strip();
+        note = note == null ? null : note.strip();
+    }
 }

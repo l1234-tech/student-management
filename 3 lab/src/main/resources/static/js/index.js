@@ -8,7 +8,13 @@ document.querySelector(".add-button").onclick=()=>location.href="/add-student/";
 async function loadStudents(){
     showPageError("");
     const params=new URLSearchParams();
-    new FormData(filterForm).forEach((value,key)=>{if(String(value).trim())params.set(key,String(value).trim());});params.set("page",page);
+    new FormData(filterForm).forEach((value,key)=>{
+        const clean=String(value).trim();
+        const field=filterForm.elements.namedItem(key);
+        if(clean) params.set(key,clean);
+        // Whitespace-only search must not silently become an unrestricted list.
+        else if(field?.dataset.whitespaceOnly === 'true') params.set(key,'');
+    });params.set("page",page);
     const response=await apiFetch("/api/requests?"+params);const result=await response.json();
     if(!response.ok){showPageError(result.error?.message||"Ошибка загрузки");return;}
     const table=document.getElementById("student-table");table.replaceChildren();

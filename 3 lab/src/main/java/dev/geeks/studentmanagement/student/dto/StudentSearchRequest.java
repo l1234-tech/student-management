@@ -12,4 +12,8 @@ public record StudentSearchRequest(
         Integer page,
         Integer size
 ) {
+    public StudentSearchRequest {
+        name = name == null ? null : name.strip();
+        group = group == null ? null : group.strip();
+    }
 }
