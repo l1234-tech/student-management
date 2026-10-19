@@ -711,12 +711,8 @@ Access по умолчанию действует 15 минут, refresh — 30 
 Из `SecurityConfig`, сокращённо:
 
 ```java
-.requestMatchers(HttpMethod.GET, "/api/user/students", "/api/user/students/**")
-    .hasAnyRole("USER", "ADMIN")
-.requestMatchers(HttpMethod.POST, "/api/user/students/search")
-    .hasAnyRole("USER", "ADMIN")
-.requestMatchers("/api/user/students", "/api/user/students/**")
-    .hasRole("ADMIN")
+.requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+.requestMatchers("/api/admin/**").hasRole("ADMIN")
 ```
 
 Сначала разрешаем чтение и поиск обеим ролям, затем остальные операции студентов — ADMIN. Если поставить общее правило первым, USER потеряет доступ к чтению. Поиск POST — отдельный маршрут: это не создание записи.
