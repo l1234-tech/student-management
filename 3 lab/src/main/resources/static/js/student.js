@@ -11,7 +11,7 @@ if (!params.has("id") || Number.isNaN(id)) {
 }
 
 async function loadStudent(ISU) {
-    const response = await apiFetch(`/api/requests/${ISU}`);
+    const response = await apiFetch(`/api/user/students/${ISU}`);
     const result = await response.json();
 
     if (!response.ok) {
