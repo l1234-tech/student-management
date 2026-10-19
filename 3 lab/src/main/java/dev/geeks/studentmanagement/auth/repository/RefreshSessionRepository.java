@@ -11,11 +11,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface RefreshSessionRepository extends JpaRepository<RefreshSession, String> {
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("select s from RefreshSession s where s.id = :id")
-    Optional<RefreshSession> findForRotation(@Param("id") String id);
+  @Lock(LockModeType.PESSIMISTIC_WRITE)
+  @Query("select s from RefreshSession s where s.id = :id")
+  Optional<RefreshSession> findForRotation(@Param("id") String id);
 
-    @Modifying
-    @Query("delete from RefreshSession s where s.expiresAt < :cutoff")
-    int deleteExpiredBefore(@Param("cutoff") Instant cutoff);
+  @Modifying
+  @Query("delete from RefreshSession s where s.expiresAt < :cutoff")
+  int deleteExpiredBefore(@Param("cutoff") Instant cutoff);
 }

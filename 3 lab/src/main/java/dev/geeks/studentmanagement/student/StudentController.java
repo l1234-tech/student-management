@@ -20,67 +20,66 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Student endpoints are split by privilege: USER routes are read-only and
- * ADMIN routes mutate student records.
+ * Student endpoints are split by privilege: USER routes are read-only and ADMIN routes mutate
+ * student records.
  */
 @RestController
 public class StudentController {
-    private final StudentService service;
+  private final StudentService service;
 
-    public StudentController(StudentService service) {
-        this.service = service;
-    }
+  public StudentController(StudentService service) {
+    this.service = service;
+  }
 
-    @PostMapping("/api/user/students/search")
-    public PageResponse<StudentDto> search(@RequestBody StudentSearchRequest request) {
-        return service.list(request);
-    }
+  @PostMapping("/api/user/students/search")
+  public PageResponse<StudentDto> search(@RequestBody StudentSearchRequest request) {
+    return service.list(request);
+  }
 
-    @GetMapping("/api/user/students")
-    public PageResponse<StudentDto> getStudents(
-            @ModelAttribute StudentSearchRequest request,
-            @RequestParam(name = "is_foreign", required = false) Boolean foreign) {
-        return service.list(new StudentSearchRequest(
-                request.ISU(),
-                request.name(),
-                request.group(),
-                request.dormitory(),
-                request.room(),
-                foreign == null ? request.isForeign() : foreign,
-                request.sort(),
-                request.page(),
-                request.size()));
-    }
+  @GetMapping("/api/user/students")
+  public PageResponse<StudentDto> getStudents(
+      @ModelAttribute StudentSearchRequest request,
+      @RequestParam(name = "is_foreign", required = false) Boolean foreign) {
+    return service.list(
+        new StudentSearchRequest(
+            request.ISU(),
+            request.name(),
+            request.group(),
+            request.dormitory(),
+            request.room(),
+            foreign == null ? request.isForeign() : foreign,
+            request.sort(),
+            request.page(),
+            request.size()));
+  }
 
-    @GetMapping("/api/user/students/{isu}")
-    public Map<String, StudentDto> getStudent(@PathVariable Integer isu) {
-        return Map.of("data", service.getByIsu(isu));
-    }
+  @GetMapping("/api/user/students/{isu}")
+  public Map<String, StudentDto> getStudent(@PathVariable Integer isu) {
+    return Map.of("data", service.getByIsu(isu));
+  }
 
-    @PostMapping("/api/admin/students")
-    public ResponseEntity<Map<String, StudentDto>> createStudent(
-            @Valid @RequestBody StudentCreateRequest request) {
-        var student = service.create(request);
-        return ResponseEntity.status(201).body(Map.of("data", student));
-    }
+  @PostMapping("/api/admin/students")
+  public ResponseEntity<Map<String, StudentDto>> createStudent(
+      @Valid @RequestBody StudentCreateRequest request) {
+    var student = service.create(request);
+    return ResponseEntity.status(201).body(Map.of("data", student));
+  }
 
-    @DeleteMapping("/api/admin/students/{isu}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable Integer isu) {
-        service.delete(isu);
-        return ResponseEntity.noContent().build();
-    }
+  @DeleteMapping("/api/admin/students/{isu}")
+  public ResponseEntity<Void> deleteStudent(@PathVariable Integer isu) {
+    service.delete(isu);
+    return ResponseEntity.noContent().build();
+  }
 
-    @PutMapping("/api/admin/students/{isu}")
-    public Map<String, StudentDto> replaceStudent(
-            @PathVariable Integer isu,
-            @Valid @RequestBody StudentCreateRequest request) {
-        return Map.of("data", service.replace(isu, request));
-    }
+  @PutMapping("/api/admin/students/{isu}")
+  public Map<String, StudentDto> replaceStudent(
+      @PathVariable Integer isu, @Valid @RequestBody StudentCreateRequest request) {
+    return Map.of("data", service.replace(isu, request));
+  }
 
-    @PatchMapping("/api/admin/students/{isu}")
-    public Map<String, StudentDto> patchStudent(
-            @PathVariable Integer isu,
-            @RequestBody StudentUpdateRequest request) {
-        return Map.of("data", service.patch(isu, request));
-    }
+  @PatchMapping("/api/admin/students/{isu}")
+  public Map<String, StudentDto> patchStudent(
+      @PathVariable Integer isu, @RequestBody StudentUpdateRequest request) {
+    return Map.of("data", service.patch(isu, request));
+  }
 }

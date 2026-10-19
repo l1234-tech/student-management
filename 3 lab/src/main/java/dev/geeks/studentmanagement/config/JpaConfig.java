@@ -18,45 +18,47 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories("dev.geeks.studentmanagement")
 public class JpaConfig {
-    private final String weaving;
-    private final String ddlGeneration;
-    private final String ddlOutputMode;
+  private final String weaving;
+  private final String ddlGeneration;
+  private final String ddlOutputMode;
 
-    public JpaConfig(
-            @Value("${spring.jpa.properties.eclipselink.weaving:false}") String weaving,
-            @Value("${spring.jpa.properties.eclipselink.ddl-generation:create-or-extend-tables}") String ddlGeneration,
-            @Value("${spring.jpa.properties.eclipselink.ddl-generation.output-mode:database}") String ddlOutputMode) {
-        this.weaving = weaving;
-        this.ddlGeneration = ddlGeneration;
-        this.ddlOutputMode = ddlOutputMode;
-    }
+  public JpaConfig(
+      @Value("${spring.jpa.properties.eclipselink.weaving:false}") String weaving,
+      @Value("${spring.jpa.properties.eclipselink.ddl-generation:create-or-extend-tables}")
+          String ddlGeneration,
+      @Value("${spring.jpa.properties.eclipselink.ddl-generation.output-mode:database}")
+          String ddlOutputMode) {
+    this.weaving = weaving;
+    this.ddlGeneration = ddlGeneration;
+    this.ddlOutputMode = ddlOutputMode;
+  }
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource)
-            throws SQLException {
-        // Older lab databases may still limit note to 255 characters.
-        try (var connection = dataSource.getConnection()) {
-            if ("PostgreSQL".equals(connection.getMetaData().getDatabaseProductName())) {
-                try (var statement = connection.createStatement()) {
-                    statement.execute(
-                            "ALTER TABLE IF EXISTS students ALTER COLUMN note TYPE VARCHAR(2000)");
-                }
-            }
+  @Bean
+  public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource)
+      throws SQLException {
+    // Older lab databases may still limit note to 255 characters.
+    try (var connection = dataSource.getConnection()) {
+      if ("PostgreSQL".equals(connection.getMetaData().getDatabaseProductName())) {
+        try (var statement = connection.createStatement()) {
+          statement.execute("ALTER TABLE IF EXISTS students ALTER COLUMN note TYPE VARCHAR(2000)");
         }
-
-        var factory = new LocalContainerEntityManagerFactoryBean();
-        factory.setDataSource(dataSource);
-        factory.setPackagesToScan("dev.geeks.studentmanagement");
-        factory.setJpaVendorAdapter(new EclipseLinkJpaVendorAdapter());
-        factory.setJpaPropertyMap(Map.of(
-                "eclipselink.weaving", weaving,
-                "eclipselink.ddl-generation", ddlGeneration,
-                "eclipselink.ddl-generation.output-mode", ddlOutputMode));
-        return factory;
+      }
     }
 
-    @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory factory) {
-        return new JpaTransactionManager(factory);
-    }
+    var factory = new LocalContainerEntityManagerFactoryBean();
+    factory.setDataSource(dataSource);
+    factory.setPackagesToScan("dev.geeks.studentmanagement");
+    factory.setJpaVendorAdapter(new EclipseLinkJpaVendorAdapter());
+    factory.setJpaPropertyMap(
+        Map.of(
+            "eclipselink.weaving", weaving,
+            "eclipselink.ddl-generation", ddlGeneration,
+            "eclipselink.ddl-generation.output-mode", ddlOutputMode));
+    return factory;
+  }
+
+  @Bean
+  public PlatformTransactionManager transactionManager(EntityManagerFactory factory) {
+    return new JpaTransactionManager(factory);
+  }
 }

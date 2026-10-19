@@ -5,10 +5,4 @@ import java.util.Map;
 
 // Единый формат ошибки API. Все exception handler должны возвращать объект такого вида.
 public record ApiError(
-        String code,
-        String message,
-        int status,
-        Instant timestamp,
-        Map<String, String> details
-) {
-}
+    String code, String message, int status, Instant timestamp, Map<String, String> details) {}

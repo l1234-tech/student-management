@@ -11,18 +11,18 @@ import org.springframework.stereotype.Component;
 @Component
 @EnableScheduling
 public class RefreshSessionCleanup {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RefreshSessionCleanup.class);
-    private final AuthService authService;
+  private static final Logger LOGGER = LoggerFactory.getLogger(RefreshSessionCleanup.class);
+  private final AuthService authService;
 
-    public RefreshSessionCleanup(AuthService authService) {
-        this.authService = authService;
-    }
+  public RefreshSessionCleanup(AuthService authService) {
+    this.authService = authService;
+  }
 
-    @Scheduled(cron = "${app.auth.refresh-cleanup-cron:0 0 3 * * *}")
-    public void cleanupExpiredSessions() {
-        int removed = authService.cleanupExpiredSessions(Instant.now());
-        if (removed > 0) {
-            LOGGER.info("Removed {} expired refresh sessions", removed);
-        }
+  @Scheduled(cron = "${app.auth.refresh-cleanup-cron:0 0 3 * * *}")
+  public void cleanupExpiredSessions() {
+    int removed = authService.cleanupExpiredSessions(Instant.now());
+    if (removed > 0) {
+      LOGGER.info("Removed {} expired refresh sessions", removed);
     }
+  }
 }

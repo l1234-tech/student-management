@@ -14,31 +14,32 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 @Order(-200)
 public class QueryMethodFilter extends OncePerRequestFilter {
-    @Override
-    protected void doFilterInternal(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain chain) throws ServletException, IOException {
-        if ("QUERY".equals(request.getMethod())
-                && "/api/user/students".equals(request.getRequestURI())) {
-            chain.doFilter(new HttpServletRequestWrapper(request) {
-                @Override
-                public String getMethod() {
-                    return "POST";
-                }
+  @Override
+  protected void doFilterInternal(
+      HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+      throws ServletException, IOException {
+    if ("QUERY".equals(request.getMethod())
+        && "/api/user/students".equals(request.getRequestURI())) {
+      chain.doFilter(
+          new HttpServletRequestWrapper(request) {
+            @Override
+            public String getMethod() {
+              return "POST";
+            }
 
-                @Override
-                public String getRequestURI() {
-                    return "/api/user/students/search";
-                }
+            @Override
+            public String getRequestURI() {
+              return "/api/user/students/search";
+            }
 
-                @Override
-                public String getServletPath() {
-                    return "/api/user/students/search";
-                }
-            }, response);
-            return;
-        }
-        chain.doFilter(request, response);
+            @Override
+            public String getServletPath() {
+              return "/api/user/students/search";
+            }
+          },
+          response);
+      return;
     }
+    chain.doFilter(request, response);
+  }
 }
