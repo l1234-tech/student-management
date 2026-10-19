@@ -15,7 +15,7 @@ async function loadStudents(){
         // Whitespace-only search must not silently become an unrestricted list.
         else if(field?.dataset.whitespaceOnly === 'true') params.set(key,'');
     });params.set("page",page);
-    const response=await apiFetch("/api/requests?"+params);const result=await response.json();
+    const response=await apiFetch("/api/user/students?"+params);const result=await response.json();
     if(!response.ok){showPageError(result.error?.message||"Ошибка загрузки");return;}
     const table=document.getElementById("student-table");table.replaceChildren();
     for(const student of result.data){
@@ -26,7 +26,7 @@ async function loadStudents(){
         button("Подробная информация",()=>location.href="/student/?id="+student.ISU,"info-button");
         if(isAdmin()){
             button("Редактировать",()=>location.href="/add-student/?id="+student.ISU,"edit-button");
-            button("Удалить",async()=>{if(!confirm("Удалить студента "+student.name+"?"))return;const r=await apiFetch("/api/requests/"+student.ISU,{method:"DELETE"});if(!r.ok){showPageError((await r.json()).error?.message);return;}if(result.data.length===1&&page>0)page--;await loadStudents();},"delete-button");
+            button("Удалить",async()=>{if(!confirm("Удалить студента "+student.name+"?"))return;const r=await apiFetch("/api/admin/students/"+student.ISU,{method:"DELETE"});if(!r.ok){showPageError((await r.json()).error?.message);return;}if(result.data.length===1&&page>0)page--;await loadStudents();},"delete-button");
         }
         actions.append(container);row.append(actions);table.append(row);
     }
