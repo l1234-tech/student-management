@@ -1,6 +1,6 @@
 from .errors import BadRequest, ConflictError, NotFound
 from .repository import StudentRepository
- 
+
 FILTER_FIELDS = ("ISU", "name", "group", "dormitory", "room", "is_foreign")
 NUMERIC_FILTERS = ("ISU", "dormitory", "room")
 

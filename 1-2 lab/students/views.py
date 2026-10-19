@@ -8,48 +8,49 @@ from . import services
 
 
 def index(request):
-    return render(request, 'students/index.html')
+    return render(request, "students/index.html")
+
 
 def student_form(request):
-    return render(request, 'students/student_form.html')
+    return render(request, "students/student_form.html")
+
 
 def student_detail_page(request):
-    return render(request, 'students/student.html')
+    return render(request, "students/student.html")
 
 
-
-@api_view(['GET', 'POST', 'QUERY'])
+@api_view(["GET", "POST", "QUERY"])
 def api_requests(request):
-    if request.method == 'GET':
+    if request.method == "GET":
         students = services.list_students(request.query_params.dict())
         serializer = StudentSerializer(students, many=True)
-        return Response({'data': serializer.data})
+        return Response({"data": serializer.data})
 
-    if request.method == 'QUERY':
+    if request.method == "QUERY":
         students = services.list_students(request.data)
         serializer = StudentSerializer(students, many=True)
-        return Response({'data': serializer.data})
+        return Response({"data": serializer.data})
 
-    if request.method == 'POST':
+    if request.method == "POST":
         serializer = StudentSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         student = services.create_student(serializer.validated_data)
-        return Response({'data': student}, status=status.HTTP_201_CREATED)
+        return Response({"data": student}, status=status.HTTP_201_CREATED)
 
 
-@api_view(['GET', 'PATCH', 'DELETE'])
+@api_view(["GET", "PATCH", "DELETE"])
 def api_request_detail(request, ISU: int):
-    if request.method == 'GET':
+    if request.method == "GET":
         student = services.get_student(ISU)
-        return Response({'data': student})
+        return Response({"data": student})
 
-    if request.method == 'PATCH':
+    if request.method == "PATCH":
         student = services.get_student(ISU)
         serializer = StudentSerializer(student, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         updated_student = services.update_student(ISU, serializer.validated_data)
-        return Response({'data': updated_student})
+        return Response({"data": updated_student})
 
-    if request.method == 'DELETE':
+    if request.method == "DELETE":
         services.delete_student(ISU)
         return Response(status=status.HTTP_204_NO_CONTENT)
