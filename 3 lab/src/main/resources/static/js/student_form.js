@@ -30,7 +30,7 @@ form.addEventListener("submit", async function(event) {
     };
 
     if (hasEditId) delete student.ISU;
-    const url = hasEditId ? `/api/requests/${editId}` : "/api/requests";
+    const url = hasEditId ? `/api/admin/students/${editId}` : "/api/admin/students";
     const method = hasEditId ? "PATCH" : "POST";
 
     const response = await apiFetch(url, {
@@ -51,7 +51,7 @@ form.addEventListener("submit", async function(event) {
 });
 
 async function loadStudent(ISU) {
-    const response = await apiFetch(`/api/requests/${ISU}`);
+    const response = await apiFetch(`/api/user/students/${ISU}`);
     const result = await response.json();
 
     if (!response.ok) {
