@@ -10,6 +10,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.junit.jupiter.api.Assertions.*;
 import com.fasterxml.jackson.databind.*;
 import dev.geeks.studentmanagement.auth.repository.UserRepository;
+import dev.geeks.studentmanagement.auth.repository.RefreshSessionRepository;
+import dev.geeks.studentmanagement.auth.model.RefreshSession;
+import dev.geeks.studentmanagement.auth.AuthService;
 import dev.geeks.studentmanagement.security.JwtService;
 import java.time.*;
 @SpringBootTest(properties={"spring.datasource.url=${LAB_TEST_DB_URL:jdbc:h2:mem:labtest;MODE=PostgreSQL;DB_CLOSE_DELAY=-1}","spring.datasource.username=${LAB_TEST_DB_USER:sa}","spring.datasource.password=${LAB_TEST_DB_PASSWORD:}","app.admin.username=testadmin","app.admin.email=admin@test.local"})
@@ -28,6 +31,7 @@ class ApiIntegrationTest {
     }
 
     @Autowired MockMvc mvc; @Autowired ObjectMapper json; @Autowired UserRepository users; @Autowired JwtService jwt;
+    @Autowired RefreshSessionRepository sessions; @Autowired AuthService authService;
     private String access;
     private JsonNode send(MockHttpServletRequestBuilder r,int status) throws Exception {
         var result=mvc.perform(r.contentType("application/json")).andExpect(status().is(status)).andReturn();
@@ -50,12 +54,20 @@ class ApiIntegrationTest {
         send(auth(put("/api/admin/students/123456").content(student(123456,1234))),403);
         send(auth(patch("/api/admin/students/123456").content("{\"room\":5678}")),403);
         send(auth(delete("/api/admin/students/123456")),403);
+        String originalSessionId = jwt.validateRefreshToken(refresh).getId();
         var rotated=send(post("/api/auth/refresh").content("{\"refreshToken\":\""+refresh+"\"}"),200);
+        assertTrue(sessions.findById(originalSessionId).orElseThrow().isRevoked());
         send(post("/api/auth/refresh").content("{\"refreshToken\":\""+refresh+"\"}"),401);
         send(post("/api/auth/refresh").content("{\"refreshToken\":\""+access+"\"}"),401);
         String rotatedRefresh=rotated.get("refreshToken").asText();
+        String rotatedSessionId = jwt.validateRefreshToken(rotatedRefresh).getId();
         send(post("/api/auth/logout").content("{\"refreshToken\":\""+rotatedRefresh+"\"}"),204);
+        assertTrue(sessions.findById(rotatedSessionId).orElseThrow().isRevoked());
         send(post("/api/auth/refresh").content("{\"refreshToken\":\""+rotatedRefresh+"\"}"),401);
+        var expired = new RefreshSession("expired-test-session", "newuser", Instant.now().minusSeconds(60));
+        sessions.saveAndFlush(expired);
+        assertEquals(1, authService.cleanupExpiredSessions(Instant.now()));
+        assertFalse(sessions.existsById("expired-test-session"));
         access=registered.get("refreshToken").asText();send(auth(get("/api/user/students")),401);
         var login=send(post("/api/auth/login").content("{\"username\":\"testadmin\",\"password\":\""+TEST_PASSWORD+"\"}"),200);
         access=login.get("accessToken").asText();
