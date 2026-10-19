@@ -2,7 +2,7 @@ name: Lab 3 tests
 
 on:
   push:
-    branches: [main, syrch]
+    branches: [syrch]
     paths:
       - "3 lab/**"
       - ".github/workflows/lab3-tests.yml"
