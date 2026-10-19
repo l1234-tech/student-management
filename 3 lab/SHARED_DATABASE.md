@@ -78,7 +78,7 @@ $env:DB_PASSWORD = [System.Net.NetworkCredential]::new("", $dbPassword).Password
 $env:DB_URL = Read-Host "Полный JDBC URL, полученный от владельца"
 ```
 
-Пароль вводите отдельно в `DB_PASSWORD`, не добавляйте его в URL.
+Пароль вводите отдельно в `DB_PASSWORD`, не добавляйте его в URL. У `application.yml` больше нет небезопасного пароля по умолчанию.
 
 Для проверки TCP-доступности можно выполнить:
 
