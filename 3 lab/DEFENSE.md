@@ -823,7 +823,7 @@ spring:
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/student_management}
     username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:postgres}
+    password: ${DB_PASSWORD}
 ```
 
 `${SERVER_PORT:8080}` — взять значение SERVER_PORT, а при отсутствии использовать 8080. Настройки по умолчанию не означают, что у любой PostgreSQL пароль postgres; свой пароль задают через окружение.
