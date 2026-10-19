@@ -296,16 +296,16 @@ Authorization: Bearer <accessToken>
 | POST | `/api/auth/refresh` | по refresh-токену | новая пара, `200` |
 | POST | `/api/auth/logout` | по refresh-токену | отзыв refresh, `204` |
 | GET | `/api/auth/me` | USER / ADMIN | имя и роль |
-| GET | `/api/requests` | USER / ADMIN | список и метаданные страницы |
-| GET | `/api/requests/{isu}` | USER / ADMIN | один студент |
-| POST | `/api/requests` | ADMIN | создание, `201` |
-| PUT | `/api/requests/{isu}` | ADMIN | полная замена, `200` |
-| PATCH | `/api/requests/{isu}` | ADMIN | частичное изменение, `200` |
+| GET | `/api/user/students` | USER / ADMIN | список и метаданные страницы |
+| GET | `/api/user/students/{isu}` | USER / ADMIN | один студент |
+| POST | `/api/admin/students` | ADMIN | создание, `201` |
+| PUT | `/api/admin/students/{isu}` | ADMIN | полная замена, `200` |
+| PATCH | `/api/admin/students/{isu}` | ADMIN | частичное изменение, `200` |
 | DELETE | `/api/requests/{isu}` | ADMIN | удаление, `204` |
-| QUERY | `/api/requests` | USER / ADMIN | фильтрация через JSON |
-| POST | `/api/requests/search` | USER / ADMIN | альтернативный поиск через JSON |
+| QUERY | `/api/user/students` | USER / ADMIN | фильтрация через JSON |
+| POST | `/api/user/students/search` | USER / ADMIN | альтернативный поиск через JSON |
 
-Метод QUERY сохраняет контракт предыдущей лабы. `QueryMethodFilter` направляет такой запрос в обработчик поиска до проверки ролей; для инструментов без поддержки QUERY используйте POST `/api/requests/search`.
+Метод QUERY сохраняет контракт предыдущей лабы. `QueryMethodFilter` направляет такой запрос на `/api/user/students/search`; для инструментов без поддержки QUERY используйте POST `/api/user/students/search`. Маршруты чтения доступны USER и ADMIN, изменение данных — только через `/api/admin/students/**` для ADMIN.
 
 ### Пример создания / PUT
 
@@ -335,7 +335,7 @@ PATCH может содержать только нужные поля:
 ### Фильтры, сортировка и страницы
 
 ```text
-GET /api/requests?group=P1234&is_foreign=false&sort=name,asc&page=0&size=10
+GET /api/user/students?group=P1234&is_foreign=false&sort=name,asc&page=0&size=10
 ```
 
 Фильтры: `ISU`, `name`, `group`, `dormitory`, `room`, `is_foreign` (для Java-контракта также `isForeign`). Используется точное совпадение, без поиска подстроки.
@@ -385,7 +385,7 @@ sequenceDiagram
     S->>D: Найти пользователя
     S->>S: Проверить BCrypt-хеш
     S-->>B: accessToken + refreshToken
-    B->>S: GET /api/requests + Bearer accessToken
+    B->>S: GET /api/user/students + Bearer accessToken
     S->>S: Проверить подпись, срок и роль
     S-->>B: Данные
     B->>S: Запрос с истёкшим accessToken
