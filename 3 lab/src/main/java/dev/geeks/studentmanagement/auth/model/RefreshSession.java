@@ -22,7 +22,7 @@ public class RefreshSession {
 
   // Read and maintain the previous flag during migration of existing databases.
   @Column(name = "revoked")
-  private Boolean legacyRevoked;
+  private boolean legacyRevoked;
 
   protected RefreshSession() {}
 
@@ -45,7 +45,7 @@ public class RefreshSession {
   }
 
   public boolean isRevoked() {
-    return revokedAt != null || Boolean.TRUE.equals(legacyRevoked);
+    return revokedAt != null || legacyRevoked;
   }
 
   public void revoke() {
