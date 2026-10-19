@@ -1,4 +1,7 @@
 target/
 data/
-.env
 *.log
+.env
+.env.*
+!.env.example
+*.key
