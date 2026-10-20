@@ -1,3 +1,5 @@
+// описывает и получает данные, которые пользователь отправялет при реги нового пользователя 
+
 package dev.geeks.studentmanagement.auth.dto;
 
 import jakarta.validation.constraints.*;

@@ -1,3 +1,6 @@
+// также предоставляем работу с таблицей , но работаем уже с refresh сессиями 
+// блокировка при ротации токена (ограничение гонок) , удаление истекших сессий 
+
 package dev.geeks.studentmanagement.auth.repository;
 
 import dev.geeks.studentmanagement.auth.model.RefreshSession;

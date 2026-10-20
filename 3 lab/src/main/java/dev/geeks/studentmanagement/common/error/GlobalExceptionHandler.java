@@ -1,3 +1,7 @@
+// главный обработчик ошибок 
+// мы не пишем для каждого контроллера свой обработчик , а делаем 1 глобальный 
+// по которому все работают 
+
 package dev.geeks.studentmanagement.common.error;
 
 import dev.geeks.studentmanagement.common.exception.*;
@@ -17,7 +21,13 @@ public class GlobalExceptionHandler {
             Map.of(
                 "error",
                 new ApiError(
-                    HttpStatus.valueOf(status).name(), message, status, Instant.now(), details)));
+                    HttpStatus.valueOf(status).name(), 
+                    message, 
+                    status, 
+                    Instant.now(), 
+                    details)
+                  )
+                );
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)

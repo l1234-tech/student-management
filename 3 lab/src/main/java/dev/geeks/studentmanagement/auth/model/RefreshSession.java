@@ -1,3 +1,5 @@
+// храним и описываем сессию пользователей: чья , когда началась , закончилась , была ли отозвана 
+
 package dev.geeks.studentmanagement.auth.model;
 
 import jakarta.persistence.Column;
@@ -20,7 +22,6 @@ public class RefreshSession {
   @Column(name = "revoked_at")
   private Instant revokedAt;
 
-  // Read and maintain the previous flag during migration of existing databases.
   @Column(name = "revoked")
   private boolean legacyRevoked;
 

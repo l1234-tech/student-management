@@ -1,3 +1,6 @@
+// контроллер HTTP API авторизации 
+// клиент отправил запрос - здесь принимаем его и передаем сервису - возвращаем результат клиенту 
+
 package dev.geeks.studentmanagement.auth;
 
 import dev.geeks.studentmanagement.auth.dto.*;

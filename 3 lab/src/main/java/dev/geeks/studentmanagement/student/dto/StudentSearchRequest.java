@@ -1,6 +1,7 @@
+// фильтрация, сортировка и пагинация (разбиение на группы\страницы) списка студентов
+
 package dev.geeks.studentmanagement.student.dto;
 
-// DTO фильтрации, сортировки и пагинации списка студентов.
 public record StudentSearchRequest(
     Integer ISU,
     String name,

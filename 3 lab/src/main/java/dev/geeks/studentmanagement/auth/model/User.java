@@ -1,3 +1,5 @@
+// представляет пользователя и описывает какие мы вообще данные о нем храним в бд 
+
 package dev.geeks.studentmanagement.auth.model;
 
 import jakarta.persistence.*;

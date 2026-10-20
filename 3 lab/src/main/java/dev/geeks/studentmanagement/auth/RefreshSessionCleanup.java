@@ -1,3 +1,6 @@
+// периодческая очистка старых refresh сессий
+// основной принцип сессий реализуется здесь 
+
 package dev.geeks.studentmanagement.auth;
 
 import java.time.Instant;
@@ -7,7 +10,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-/** Removes expired refresh-session records after they can no longer be used. */
 @Component
 @EnableScheduling
 public class RefreshSessionCleanup {

@@ -1,3 +1,6 @@
+// реализация того , что описали в AuthController 
+// по сути основная бизнес логика авторизации 
+
 package dev.geeks.studentmanagement.auth;
 
 import dev.geeks.studentmanagement.auth.dto.LoginRequest;
@@ -103,7 +106,6 @@ public class AuthService {
                 sessions.save(session);
               });
     } catch (io.jsonwebtoken.JwtException | IllegalArgumentException ignored) {
-      // Logout is idempotent: invalid or already-revoked tokens require no action.
     }
   }
 

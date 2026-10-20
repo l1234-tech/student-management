@@ -1,3 +1,5 @@
+// настройка взаимодействия с Spring Data JPA с бд через EclipseLink
+
 package dev.geeks.studentmanagement.config;
 
 import jakarta.persistence.EntityManagerFactory;
@@ -36,7 +38,6 @@ public class JpaConfig {
   @Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource)
       throws SQLException {
-    // Older lab databases may still limit note to 255 characters.
     try (var connection = dataSource.getConnection()) {
       if ("PostgreSQL".equals(connection.getMetaData().getDatabaseProductName())) {
         try (var statement = connection.createStatement()) {

@@ -1,3 +1,7 @@
+// бизнес логика студентов 
+// сервис получает студентов из базы , проверяет данные и изменяет записи 
+// удаляет их  и выполняет поиск , сортировку и пагинацию
+
 package dev.geeks.studentmanagement.student;
 
 import dev.geeks.studentmanagement.common.exception.ConflictException;
@@ -23,7 +27,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-// Бизнес-логика студентов: CRUD, фильтрация, сортировка, пагинация, проверка уникальности ISU.
 @Service
 public class StudentService {
   private static final Set<String> SORT_FIELDS =
@@ -47,17 +50,43 @@ public class StudentService {
     Specification<Student> filters =
         (root, query, cb) -> {
           var predicates = new ArrayList<Predicate>();
-          if (request.ISU() != null) predicates.add(cb.equal(root.get("isu"), request.ISU()));
-          if (request.name() != null) predicates.add(cb.equal(root.get("name"), request.name()));
-          if (request.group() != null) predicates.add(cb.equal(root.get("group"), request.group()));
+          if (request.ISU() != null) 
+            predicates.add(
+              cb.equal(root.get("isu"), 
+              request.ISU())
+            );
+
+          if (request.name() != null) 
+            predicates.add(
+              cb.equal(root.get("name"), 
+              request.name())
+            );
+            
+          if (request.group() != null) 
+            predicates.add(
+              cb.equal(root.get("group"), request.group())
+            );
+
           if (request.dormitory() != null)
-            predicates.add(cb.equal(root.get("dormitory"), request.dormitory()));
-          if (request.room() != null) predicates.add(cb.equal(root.get("room"), request.room()));
+            predicates.add(
+              cb.equal(root.get("dormitory"), request.dormitory())
+            );
+
+          if (request.room() != null) 
+            predicates.add(
+              cb.equal(root.get("room"), request.room())
+            );
+
           if (request.isForeign() != null)
-            predicates.add(cb.equal(root.get("isForeign"), request.isForeign()));
+            predicates.add(
+              cb.equal(root.get("isForeign"), request.isForeign())
+            );
+
           return cb.and(predicates.toArray(Predicate[]::new));
         };
+
     var result = repository.findAll(filters, PageRequest.of(page, size, sort));
+
     return new PageResponse<>(
         result.getContent().stream().map(StudentMapper::toDto).toList(),
         result.getNumber(),

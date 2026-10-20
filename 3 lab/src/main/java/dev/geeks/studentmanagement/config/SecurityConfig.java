@@ -1,3 +1,6 @@
+// настраиваем правила доступа к API:
+// что можно без входа, где нужно авторизация и какие доступны только админу 
+
 package dev.geeks.studentmanagement.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

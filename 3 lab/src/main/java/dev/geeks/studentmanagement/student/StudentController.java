@@ -1,3 +1,6 @@
+// REST контроллер
+// принимает HTTP запросы и передает их в сервисный слой , а затем возвращает ответ 
+
 package dev.geeks.studentmanagement.student;
 
 import dev.geeks.studentmanagement.student.dto.PageResponse;
@@ -19,10 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Student endpoints are split by privilege: USER routes are read-only and ADMIN routes mutate
- * student records.
- */
 @RestController
 public class StudentController {
   private final StudentService service;

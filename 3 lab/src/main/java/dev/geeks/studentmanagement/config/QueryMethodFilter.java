@@ -1,3 +1,6 @@
+// перехватываем запросы с методами QUERY и перенаправялем на др маршрут
+// нужен для поиска 
+
 package dev.geeks.studentmanagement.config;
 
 import jakarta.servlet.FilterChain;
@@ -10,7 +13,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-/** Maps the legacy QUERY method to the supported JSON search endpoint. */
 @Component
 @Order(-200)
 public class QueryMethodFilter extends OncePerRequestFilter {

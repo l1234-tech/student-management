@@ -1,3 +1,6 @@
+// JPA сущность студента, задаем все поля 
+// ИСУ должен быть уникальным идентификатором студента в API
+
 package dev.geeks.studentmanagement.student.model;
 
 import jakarta.persistence.Column;
@@ -6,7 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 
-// JPA entity студента. ISU должен быть уникальным идентификатором студента в API.
 @Entity
 @Table(name = "students")
 public class Student {

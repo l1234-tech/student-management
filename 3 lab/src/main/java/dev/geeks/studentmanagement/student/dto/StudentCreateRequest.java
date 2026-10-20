@@ -1,8 +1,10 @@
+// DTO создания студента, проверка полей выполняется через Bean Validation
+// описываем поля , которые клиент должен передать при создании студента (сущности)  
+
 package dev.geeks.studentmanagement.student.dto;
 
 import jakarta.validation.constraints.*;
 
-// DTO создания студента. Проверка полей выполняется через Bean Validation.
 public record StudentCreateRequest(
     @NotNull @Min(100000) @Max(999999) Integer ISU,
     @NotBlank(message = "Введите ФИО")
