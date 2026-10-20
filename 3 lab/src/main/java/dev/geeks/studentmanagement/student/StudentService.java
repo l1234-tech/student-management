@@ -1,5 +1,5 @@
-// бизнес логика студентов 
-// сервис получает студентов из базы , проверяет данные и изменяет записи 
+// бизнес логика студентов
+// сервис получает студентов из базы , проверяет данные и изменяет записи
 // удаляет их  и выполняет поиск , сортировку и пагинацию
 
 package dev.geeks.studentmanagement.student;
@@ -50,37 +50,19 @@ public class StudentService {
     Specification<Student> filters =
         (root, query, cb) -> {
           var predicates = new ArrayList<Predicate>();
-          if (request.ISU() != null) 
-            predicates.add(
-              cb.equal(root.get("isu"), 
-              request.ISU())
-            );
+          if (request.ISU() != null) predicates.add(cb.equal(root.get("isu"), request.ISU()));
 
-          if (request.name() != null) 
-            predicates.add(
-              cb.equal(root.get("name"), 
-              request.name())
-            );
-            
-          if (request.group() != null) 
-            predicates.add(
-              cb.equal(root.get("group"), request.group())
-            );
+          if (request.name() != null) predicates.add(cb.equal(root.get("name"), request.name()));
+
+          if (request.group() != null) predicates.add(cb.equal(root.get("group"), request.group()));
 
           if (request.dormitory() != null)
-            predicates.add(
-              cb.equal(root.get("dormitory"), request.dormitory())
-            );
+            predicates.add(cb.equal(root.get("dormitory"), request.dormitory()));
 
-          if (request.room() != null) 
-            predicates.add(
-              cb.equal(root.get("room"), request.room())
-            );
+          if (request.room() != null) predicates.add(cb.equal(root.get("room"), request.room()));
 
           if (request.isForeign() != null)
-            predicates.add(
-              cb.equal(root.get("isForeign"), request.isForeign())
-            );
+            predicates.add(cb.equal(root.get("isForeign"), request.isForeign()));
 
           return cb.and(predicates.toArray(Predicate[]::new));
         };
