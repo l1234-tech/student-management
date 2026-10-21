@@ -1,5 +1,5 @@
 // создаем админов из настроек окружения
-// админская версия AuthService , где построение админов 
+// админская версия AuthService , где построение админов
 
 package dev.geeks.studentmanagement.config;
 
@@ -34,20 +34,18 @@ public class AdminBootstrap implements CommandLineRunner {
   }
 
   public void run(String... args) {
-    if (username.isBlank())
-       return;
+    if (username.isBlank()) return;
 
     if (!validator.validate(new RegisterRequest(username, email, password)).isEmpty())
       throw new IllegalArgumentException("Invalid ADMIN configuration");
 
-    if (users.existsByUsername(username)) 
-      return;
+    if (users.existsByUsername(username)) return;
 
     if (users.existsByEmail(email.toLowerCase(java.util.Locale.ROOT)))
       throw new IllegalArgumentException("ADMIN email already exists");
-    
+
     var u = new User();
-    
+
     u.setUsername(username);
     u.setEmail(email.toLowerCase(java.util.Locale.ROOT));
     u.setPasswordHash(passwords.encode(password));

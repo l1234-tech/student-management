@@ -1,6 +1,5 @@
 // здесь мы ивызываем проверку при каждом запросе, используя функционал JWASersice
 
-
 package dev.geeks.studentmanagement.security;
 
 import dev.geeks.studentmanagement.auth.repository.UserRepository;
