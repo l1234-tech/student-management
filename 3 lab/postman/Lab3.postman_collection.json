@@ -87,7 +87,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/api/requests",
+        "url": "{{baseUrl}}/api/admin/students",
         "auth": {
           "type": "bearer",
           "bearer": [
@@ -114,7 +114,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "{{baseUrl}}/api/requests?sort=ISU,asc&page=0&size=10",
+        "url": "{{baseUrl}}/api/user/students?sort=ISU,asc&page=0&size=10",
         "auth": {
           "type": "bearer",
           "bearer": [
@@ -132,7 +132,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "{{baseUrl}}/api/requests?group=P1234",
+        "url": "{{baseUrl}}/api/user/students?group=P1234",
         "auth": {
           "type": "bearer",
           "bearer": [
@@ -155,7 +155,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/api/requests",
+        "url": "{{baseUrl}}/api/user/students",
         "auth": {
           "type": "bearer",
           "bearer": [
@@ -182,7 +182,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "{{baseUrl}}/api/requests/123456",
+        "url": "{{baseUrl}}/api/user/students/123456",
         "auth": {
           "type": "bearer",
           "bearer": [
@@ -205,7 +205,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/api/requests/123456",
+        "url": "{{baseUrl}}/api/admin/students/123456",
         "auth": {
           "type": "bearer",
           "bearer": [
@@ -237,7 +237,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/api/requests/123456",
+        "url": "{{baseUrl}}/api/admin/students/123456",
         "auth": {
           "type": "bearer",
           "bearer": [
@@ -333,7 +333,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "{{baseUrl}}/api/requests",
+        "url": "{{baseUrl}}/api/user/students",
         "auth": {
           "type": "bearer",
           "bearer": [
@@ -367,7 +367,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/api/requests",
+        "url": "{{baseUrl}}/api/admin/students",
         "auth": {
           "type": "bearer",
           "bearer": [
@@ -405,7 +405,7 @@
       "request": {
         "method": "DELETE",
         "header": [],
-        "url": "{{baseUrl}}/api/requests/123456",
+        "url": "{{baseUrl}}/api/admin/students/123456",
         "auth": {
           "type": "bearer",
           "bearer": [

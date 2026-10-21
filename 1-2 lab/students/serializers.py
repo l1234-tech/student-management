@@ -3,7 +3,6 @@ from datetime import date
 
 from rest_framework import serializers
 
-
 FULL_NAME_RE = re.compile(r"^[A-Za-zА-Яа-яЁё\s]+$")
 GROUP_RE = re.compile(r"^[A-Za-zА-Яа-яЁё]\d{4,5}$")
 
@@ -18,6 +17,7 @@ class StudentSerializer(serializers.Serializer):
     checkin_date = serializers.CharField(max_length=10)
     is_foreign = serializers.BooleanField()
     note = serializers.CharField(required=False, allow_blank=True)
+
     def validate_checkin_date(self, value):
         raw = str(value).strip()
         try:
@@ -30,16 +30,21 @@ class StudentSerializer(serializers.Serializer):
                 "Вы не могли заселиться в такую дату, или вы уже не студент"
             )
         if parsed > date.today():
-            raise serializers.ValidationError(
-                "Дата заселения не может быть в будущем"
-            )
+            raise serializers.ValidationError("Дата заселения не может быть в будущем")
         return raw
 
     def validate(self, attrs):
         errors = {}
         if not self.partial:
-            required = ("ISU", "name", "group",
-                        "dormitory", "room", "checkin_date", "is_foreign")
+            required = (
+                "ISU",
+                "name",
+                "group",
+                "dormitory",
+                "room",
+                "checkin_date",
+                "is_foreign",
+            )
             for field in required:
                 if field not in attrs:
                     errors[field] = "Обязательное поле"
@@ -63,9 +68,11 @@ class StudentSerializer(serializers.Serializer):
         for field, lo, hi in numeric_ranges:
             if field in attrs:
                 value = attrs[field]
-                if (isinstance(value, bool)
-                        or not isinstance(value, int)
-                        or not (lo <= value <= hi)):
+                if (
+                    isinstance(value, bool)
+                    or not isinstance(value, int)
+                    or not (lo <= value <= hi)
+                ):
                     errors[field] = f"Должно быть целым числом от {lo} до {hi}"
 
         if "checkin_date" in attrs:
@@ -87,7 +94,7 @@ class StudentSerializer(serializers.Serializer):
             raise serializers.ValidationError(errors)
 
         return attrs
-    
+
     def validate_ISU(self, value):
         if isinstance(value, bool) or not isinstance(value, int):
             raise serializers.ValidationError("ИСУ должно быть целым числом")

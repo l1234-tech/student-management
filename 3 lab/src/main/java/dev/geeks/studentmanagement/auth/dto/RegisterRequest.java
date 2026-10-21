@@ -1,16 +1,10 @@
+// описывает и получает данные, которые пользователь отправялет при реги нового пользователя
+
 package dev.geeks.studentmanagement.auth.dto;
 
 import jakarta.validation.constraints.*;
 
 public record RegisterRequest(
-    @NotBlank
-    @Pattern(regexp = "[A-Za-z0-9_]{3,50}")
-    String username,
-
-    @NotBlank @Email @Size(max = 254)
-    String email,
-
-    @NotBlank @Size(min = 8, max = 72)
-    String password
-) {
-}
+    @NotBlank @Pattern(regexp = "[A-Za-z0-9_]{3,50}") String username,
+    @NotBlank @Email @Size(max = 254) String email,
+    @NotBlank @Size(min = 8, max = 72) String password) {}

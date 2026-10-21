@@ -1,8 +1,44 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Вход · Студенты</title><link rel="stylesheet" href="/css/style.css"></head>
-<body><main><div class="login-card"><h1>Управление студентами</h1><p>Войдите для просмотра досье студентов.</p>
-<div class="login-tabs"><button id="login-tab" type="button">Вход</button><button id="register-tab" type="button">Регистрация</button></div>
-<form id="auth-form"><label for="username">Имя пользователя <span id="email-hint">или email</span></label><input id="username" required autocomplete="username">
-<div id="email-field" hidden><label for="email">Email</label><input id="email" type="email" autocomplete="email"></div>
-<label for="password">Пароль</label><input id="password" type="password" required autocomplete="current-password"><button id="submit-auth" type="submit">Войти</button></form>
-<div id="page-error" role="alert"></div><p id="register-hint" hidden>Новый аккаунт получает роль USER и может просматривать студентов. Пароль: от 8 до 72 символов.</p></div></main>
-<script src="/js/auth.js"></script><script src="/js/login.js"></script></body></html>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Вход · Студенты</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="login-card">
+        <h1>Управление студентами</h1>
+        <p>Войдите для просмотра досье студентов.</p>
+        <div class="login-tabs">
+          <button id="login-tab" type="button">Вход</button
+          ><button id="register-tab" type="button">Регистрация</button>
+        </div>
+        <form id="auth-form">
+          <label for="username"
+            >Имя пользователя <span id="email-hint">или email</span></label
+          ><input id="username" required autocomplete="username" />
+          <div id="email-field" hidden>
+            <label for="email">Email</label
+            ><input id="email" type="email" autocomplete="email" />
+          </div>
+          <label for="password">Пароль</label
+          ><input
+            id="password"
+            type="password"
+            required
+            autocomplete="current-password"
+          /><button id="submit-auth" type="submit">Войти</button>
+        </form>
+        <div id="page-error" role="alert"></div>
+        <p id="register-hint" hidden>
+          Новый аккаунт получает роль USER и может просматривать студентов.
+          Пароль: от 8 до 72 символов.
+        </p>
+      </div>
+    </main>
+    <script src="/js/auth.js"></script>
+    <script src="/js/login.js"></script>
+  </body>
+</html>

@@ -1,120 +1,107 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="static/images/favicon.jpg" type="image/jpg">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <title>
-            Форма для досье
-        </title>
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="static/images/favicon.jpg" type="image/jpg" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Форма для досье</title>
+  </head>
 
-    <body>
-        <main>
-            <div class="nav-list">
-                <nav class="nav">
-                    <ul  class="nav-list">
-                        <a class="nav-link" href="{% url 'index' %}">Главная</a>
-                        <a class="nav-link" href="{% url 'student-form' %}">Добавление студента</a>
-                    </ul>
-                </nav>
-            </div>
-            <form id="UserForm" class="main-form">
-                <h2>
-                    Форма записи
-                </h2>
-                <div class="form-group">
-                    <label for="full-name">ФИО студента:</label>
-                    <input
-                    id="full-name" 
-                    type="text"
-                    maxlength="60"
-                    placeholder="Введите ФИО"
-                    required
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="group">Группа:</label>
-                    <input 
-                    id="group"
-                    type="text"
-                    pattern="[A-Za-zА-Яа-яЁё][0-9]{4,5}"
-                    title="Группа должна начинаться с буквы, затем 4-5 цифр"
-                    placeholder="Введите группу"
-                    required
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="ISU">ИСУ id:</label>
-                    <input 
-                    id="ISU"
-                    min="100000"
-                    max="999999"
-                    type="number"
-                    placeholder="Введите ИСУ id"
-                    required
-                    >
-                </div>
+  <body>
+    <main>
+      <div class="nav-list">
+        <nav class="nav">
+          <ul class="nav-list">
+            <a class="nav-link" href="{% url 'index' %}">Главная</a>
+            <a class="nav-link" href="{% url 'student-form' %}"
+              >Добавление студента</a
+            >
+          </ul>
+        </nav>
+      </div>
+      <form id="UserForm" class="main-form">
+        <h2>Форма записи</h2>
+        <div class="form-group">
+          <label for="full-name">ФИО студента:</label>
+          <input
+            id="full-name"
+            type="text"
+            maxlength="60"
+            placeholder="Введите ФИО"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="group">Группа:</label>
+          <input
+            id="group"
+            type="text"
+            pattern="[A-Za-zА-Яа-яЁё][0-9]{4,5}"
+            title="Группа должна начинаться с буквы, затем 4-5 цифр"
+            placeholder="Введите группу"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="ISU">ИСУ id:</label>
+          <input
+            id="ISU"
+            min="100000"
+            max="999999"
+            type="number"
+            placeholder="Введите ИСУ id"
+            required
+          />
+        </div>
 
-                <div class="form-group">
-                    <label for="number-house">Номер общежития:</label>
-                    <input 
-                    id="number-house"
-                    min="1"
-                    max="20"
-                    type="number"
-                    placeholder="Введите номер общежития"
-                    required
-                    >
-                </div>
+        <div class="form-group">
+          <label for="number-house">Номер общежития:</label>
+          <input
+            id="number-house"
+            min="1"
+            max="20"
+            type="number"
+            placeholder="Введите номер общежития"
+            required
+          />
+        </div>
 
-                <div class="form-group">
-                    <label for="number-room">Комната:</label>
-                    <input 
-                    id="number-room"
-                    min="1000"
-                    max="9999"
-                    type="number"
-                    placeholder="Введите номер комнаты"
-                    required
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="date">Срок заселения:</label>
-                    <input 
-                    id="date"
-                    type="date"
-                    placeholder="Введите срок заселения"
-                    required
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="inostran">Является ли студент иностранцем?</label>
-                    <input 
-                    id="inostran"
-                    type="checkbox"
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="note">Заметки</label>
-                    <textarea
-                        id="note"
-                        placeholder="Введите описание"></textarea>
-                </div>
-                <button type="submit" class="submit-btn">
-                    Подтвердить
-                </button>
-            </form>
-            
-            
-        </main>
-        <footer class="site-footer">
-            Веб программирование 2026
-        </footer>
-        <script src="{% static 'js/student_form.js' %}"></script>
-        <script src="{% static 'js/validation.js' %}"></script>
-    </body>
+        <div class="form-group">
+          <label for="number-room">Комната:</label>
+          <input
+            id="number-room"
+            min="1000"
+            max="9999"
+            type="number"
+            placeholder="Введите номер комнаты"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="date">Срок заселения:</label>
+          <input
+            id="date"
+            type="date"
+            placeholder="Введите срок заселения"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="inostran">Является ли студент иностранцем?</label>
+          <input id="inostran" type="checkbox" />
+        </div>
+        <div class="form-group">
+          <label for="note">Заметки</label>
+          <textarea id="note" placeholder="Введите описание"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Подтвердить</button>
+      </form>
+    </main>
+    <footer class="site-footer">Веб программирование 2026</footer>
+    <script src="{% static 'js/student_form.js' %}"></script>
+    <script src="{% static 'js/validation.js' %}"></script>
+  </body>
 </html>

@@ -9,7 +9,14 @@ spring:
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/student_management}
     username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:postgres}
+    # No fallback password: configure DB_PASSWORD in the environment or enter it via start.ps1.
+    password: ${DB_PASSWORD}
+  jpa:
+    properties:
+      eclipselink:
+        weaving: false
+        ddl-generation: create-or-extend-tables
+        ddl-generation.output-mode: database
   jackson:
     deserialization:
       fail-on-unknown-properties: true
@@ -23,6 +30,8 @@ app:
     refresh-secret: ${JWT_REFRESH_SECRET:}
     access-ttl-minutes: ${JWT_ACCESS_TTL_MINUTES:15}
     refresh-ttl-days: ${JWT_REFRESH_TTL_DAYS:30}
+  auth:
+    refresh-cleanup-cron: ${REFRESH_CLEANUP_CRON:0 0 3 * * *}
 logging:
   level:
     root: info

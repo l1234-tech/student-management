@@ -181,7 +181,7 @@ java -jar .\target\student-management-0.0.1-SNAPSHOT.jar
 | `SERVER_PORT` | Порт сайта | `8080` |
 | `DB_URL` | JDBC-адрес БД | `jdbc:postgresql://localhost:5432/student_management` |
 | `DB_USERNAME` | Пользователь PostgreSQL | `postgres` |
-| `DB_PASSWORD` | Пароль подключения к PostgreSQL | `postgres`; заменяется вашим паролем через скрипт/окружение |
+| `DB_PASSWORD` | Пароль подключения к PostgreSQL | Обязателен; задаётся через `start.ps1` или окружение, небезопасного значения по умолчанию нет |
 | `ADMIN_USERNAME` | Имя администратора для начального создания | пусто |
 | `ADMIN_EMAIL` | Email администратора | пусто |
 | `ADMIN_PASSWORD` | Начальный пароль администратора | пусто |
@@ -279,7 +279,7 @@ JPA — интерфейсы и правила работы с объектам�
 
 В JSON также принимаются `checkinDate` и `isForeign` для совместимости с Java DTO; ответ использует `checkin_date` и `is_foreign`.
 
-Пользователь имеет автоматически создаваемый первичный ключ `id`, уникальные `username` и `email`, `passwordHash` и роль. Email при регистрации приводится к нижнему регистру. Refresh-сессия содержит идентификатор токена, имя пользователя, срок и признак отзыва.
+Пользователь имеет автоматически создаваемый первичный ключ `id`, уникальные `username` и `email`, `passwordHash` и роль. Email при регистрации приводится к нижнему регистру. Refresh-сессия содержит идентификатор токена, имя пользователя, срок действия и время отзыва (`revoked_at`).
 
 ## REST API
 
@@ -296,16 +296,16 @@ Authorization: Bearer <accessToken>
 | POST | `/api/auth/refresh` | по refresh-токену | новая пара, `200` |
 | POST | `/api/auth/logout` | по refresh-токену | отзыв refresh, `204` |
 | GET | `/api/auth/me` | USER / ADMIN | имя и роль |
-| GET | `/api/requests` | USER / ADMIN | список и метаданные страницы |
-| GET | `/api/requests/{isu}` | USER / ADMIN | один студент |
-| POST | `/api/requests` | ADMIN | создание, `201` |
-| PUT | `/api/requests/{isu}` | ADMIN | полная замена, `200` |
-| PATCH | `/api/requests/{isu}` | ADMIN | частичное изменение, `200` |
-| DELETE | `/api/requests/{isu}` | ADMIN | удаление, `204` |
-| QUERY | `/api/requests` | USER / ADMIN | фильтрация через JSON |
-| POST | `/api/requests/search` | USER / ADMIN | альтернативный поиск через JSON |
+| GET | `/api/user/students` | USER / ADMIN | список и метаданные страницы |
+| GET | `/api/user/students/{isu}` | USER / ADMIN | один студент |
+| POST | `/api/admin/students` | ADMIN | создание, `201` |
+| PUT | `/api/admin/students/{isu}` | ADMIN | полная замена, `200` |
+| PATCH | `/api/admin/students/{isu}` | ADMIN | частичное изменение, `200` |
+| DELETE | `/api/admin/students/{isu}` | ADMIN | удаление, `204` |
+| QUERY | `/api/user/students` | USER / ADMIN | фильтрация через JSON |
+| POST | `/api/user/students/search` | USER / ADMIN | альтернативный поиск через JSON |
 
-Метод QUERY сохраняет контракт предыдущей лабы. `QueryMethodFilter` направляет такой запрос в обработчик поиска до проверки ролей; для инструментов без поддержки QUERY используйте POST `/api/requests/search`.
+Метод QUERY сохраняет контракт предыдущей лабы. `QueryMethodFilter` направляет такой запрос на `/api/user/students/search`; для инструментов без поддержки QUERY используйте POST `/api/user/students/search`. Маршруты чтения доступны USER и ADMIN, изменение данных — только через `/api/admin/students/**` для ADMIN.
 
 ### Пример создания / PUT
 
@@ -335,7 +335,7 @@ PATCH может содержать только нужные поля:
 ### Фильтры, сортировка и страницы
 
 ```text
-GET /api/requests?group=P1234&is_foreign=false&sort=name,asc&page=0&size=10
+GET /api/user/students?group=P1234&is_foreign=false&sort=name,asc&page=0&size=10
 ```
 
 Фильтры: `ISU`, `name`, `group`, `dormitory`, `room`, `is_foreign` (для Java-контракта также `isForeign`). Используется точное совпадение, без поиска подстроки.
@@ -385,7 +385,7 @@ sequenceDiagram
     S->>D: Найти пользователя
     S->>S: Проверить BCrypt-хеш
     S-->>B: accessToken + refreshToken
-    B->>S: GET /api/requests + Bearer accessToken
+    B->>S: GET /api/user/students + Bearer accessToken
     S->>S: Проверить подпись, срок и роль
     S-->>B: Данные
     B->>S: Запрос с истёкшим accessToken
@@ -401,7 +401,7 @@ sequenceDiagram
 
 Публичная регистрация всегда создаёт USER; передать себе ADMIN в запросе нельзя. ADMIN создаётся из локальных переменных окружения. Проверка подписи и срока выполняется JWT-фильтром; текущая роль берётся из базы. Скрытие кнопок в браузере дополнительно помогает пользователю, но права обеспечиваются `SecurityConfig`.
 
-Refresh-токены ротируются: после успешного обновления старый использовать повторно нельзя. Выход отзывает refresh-сессию. Уже выданный access-токен остаётся действителен до истечения срока; отдельного списка отозванных access-токенов нет.
+Refresh-токены ротируются: после успешного обновления старый использовать повторно нельзя. Выход записывает время отзыва в `revoked_at`, не удаляя сессию физически. Истёкшие сессии очищаются фоновым заданием ежедневно в 03:00 (настройка `REFRESH_CLEANUP_CRON`). Уже выданный access-токен остаётся действителен до истечения срока; отдельного списка отозванных access-токенов нет.
 
 ## Swagger, Postman и тесты
 

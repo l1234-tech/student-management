@@ -1,11 +1,24 @@
+// также предоставляем работу с таблицей , но работаем уже с refresh сессиями
+// блокировка при ротации токена (ограничение гонок) , удаление истекших сессий
+
 package dev.geeks.studentmanagement.auth.repository;
+
 import dev.geeks.studentmanagement.auth.model.RefreshSession;
-import org.springframework.data.jpa.repository.*;
-import org.springframework.data.repository.query.Param;
 import jakarta.persistence.LockModeType;
+import java.time.Instant;
 import java.util.Optional;
-public interface RefreshSessionRepository extends JpaRepository<RefreshSession,String> {
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("select s from RefreshSession s where s.id=:id")
-    Optional<RefreshSession> findForRotation(@Param("id") String id);
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+public interface RefreshSessionRepository extends JpaRepository<RefreshSession, String> {
+  @Lock(LockModeType.PESSIMISTIC_WRITE)
+  @Query("select s from RefreshSession s where s.id = :id")
+  Optional<RefreshSession> findForRotation(@Param("id") String id);
+
+  @Modifying
+  @Query("delete from RefreshSession s where s.expiresAt < :cutoff")
+  int deleteExpiredBefore(@Param("cutoff") Instant cutoff);
 }

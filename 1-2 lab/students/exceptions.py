@@ -14,19 +14,19 @@ def custom_exception_handler(exc, context):
         code = _code_from_status(response.status_code)
 
         response.data = {
-            'error': {
-                'code': code,
-                'message': _extract_message(response.data),
-                'details': response.data,
+            "error": {
+                "code": code,
+                "message": _extract_message(response.data),
+                "details": response.data,
             }
         }
         return response
 
     return Response(
         {
-            'error': {
-                'code': 'internal_error',
-                'message': 'Внутренняя ошибка сервера',
+            "error": {
+                "code": "internal_error",
+                "message": "Внутренняя ошибка сервера",
             }
         },
         status=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -35,12 +35,12 @@ def custom_exception_handler(exc, context):
 
 def _code_from_status(status_code):
     return {
-        400: 'bad_request',
-        404: 'not_found',
-        409: 'conflict',
-        422: 'validation_error',
-        500: 'internal_error',
-    }.get(status_code, 'error')
+        400: "bad_request",
+        404: "not_found",
+        409: "conflict",
+        422: "validation_error",
+        500: "internal_error",
+    }.get(status_code, "error")
 
 
 def _extract_message(data):

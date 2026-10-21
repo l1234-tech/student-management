@@ -180,7 +180,7 @@ public interface StudentRepository
 | `@Override` | Компилятор проверяет, что метод переопределяет унаследованный |
 
 ```java
-@PostMapping("/api/requests")
+@PostMapping("/api/admin/students")
 public ResponseEntity<Map<String, StudentDto>> createStudent(
         @Valid @RequestBody StudentCreateRequest request) {
     var student = service.create(request);
@@ -272,7 +272,7 @@ sequenceDiagram
     participant S as Service
     participant R as Repository / EclipseLink
     participant D as PostgreSQL
-    B->>F: POST /api/requests + Bearer JWT
+    B->>F: POST /api/admin/students + Bearer JWT
     F->>F: Проверить токен и ADMIN
     F->>C: Разрешённый запрос
     C->>C: JSON → DTO → @Valid
@@ -596,7 +596,7 @@ if (!passwords.matches(request.password(), user.getPasswordHash())) {
 }
 ```
 
-Параметр назван username, но реализован и поиск по email. Это аутентификация. После входа USER может успешно получить `GET /api/requests`, но получит `403` при создании студента: авторизация проверяется отдельно.
+Параметр назван username, но реализован и поиск по email. Это аутентификация. После входа USER может успешно получить `GET /api/user/students`, но получит `403` при POST `/api/admin/students`: авторизация проверяется отдельно.
 
 | Ситуация | Результат |
 | --- | --- |
@@ -711,12 +711,8 @@ Access по умолчанию действует 15 минут, refresh — 30 
 Из `SecurityConfig`, сокращённо:
 
 ```java
-.requestMatchers(HttpMethod.GET, "/api/requests", "/api/requests/**")
-    .hasAnyRole("USER", "ADMIN")
-.requestMatchers(HttpMethod.POST, "/api/requests/search")
-    .hasAnyRole("USER", "ADMIN")
-.requestMatchers("/api/requests", "/api/requests/**")
-    .hasRole("ADMIN")
+.requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+.requestMatchers("/api/admin/**").hasRole("ADMIN")
 ```
 
 Сначала разрешаем чтение и поиск обеим ролям, затем остальные операции студентов — ADMIN. Если поставить общее правило первым, USER потеряет доступ к чтению. Поиск POST — отдельный маршрут: это не создание записи.
@@ -827,7 +823,7 @@ spring:
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/student_management}
     username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:postgres}
+    password: ${DB_PASSWORD}
 ```
 
 `${SERVER_PORT:8080}` — взять значение SERVER_PORT, а при отсутствии использовать 8080. Настройки по умолчанию не означают, что у любой PostgreSQL пароль postgres; свой пароль задают через окружение.
@@ -900,7 +896,7 @@ JWT-секреты по умолчанию генерируются через S
 }
 ```
 
-Выберите свободный ИСУ в учебной базе. JSON отправляется в POST `/api/requests` с действительным ADMIN access-токеном; успешный ответ — `201`. Для PATCH достаточно `{"room":4321}`. После согласованного удаления DELETE вернёт `204`, а GET того же студента — `404`.
+Выберите свободный ИСУ в учебной базе. JSON отправляется в POST `/api/admin/students` с действительным ADMIN access-токеном; успешный ответ — `201`. Для PATCH достаточно `{"room":4321}`. После согласованного удаления DELETE вернёт `204`, а GET `/api/user/students/{isu}` того же студента — `404`.
 
 ### Вопросы, которые часто следуют за демонстрацией
 
