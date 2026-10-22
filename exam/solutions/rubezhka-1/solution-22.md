@@ -1,0 +1,31 @@
+# Рубежка №1 — решение билета 22
+
+Материалы: [лекции](../../../lectures/README.md), [лабораторная №3](../../../3%20lab/DEFENSE.md).
+
+## Теория 1. Внедрение в private-поле
+
+Java-код не может напрямую обращаться к private-полю другого класса, но reflection позволяет библиотеке получить доступ к полю в пределах правил доступа/модульных ограничений JVM. Spring обнаруживает аннотацию, находит поле через метаданные, делает его доступным для внедрения и записывает ссылку на зависимость при создании bean.
+
+Это один из доводов в пользу constructor injection: зависимости видны в API класса, а объект можно создавать и тестировать обычным способом без скрытого изменения полей после конструктора. Reflection не означает, что поле стало public для остального приложения.
+
+## Теория 2. BeanDefinition и post-processors
+
+BeanDefinition — метаданные о том, как создать bean: класс, scope, зависимости и параметры. Готовый bean — реальный экземпляр объекта после создания и этапов инициализации.
+
+`BeanFactoryPostProcessor` работает с метаданными bean definitions до обычного создания экземпляров. `BeanPostProcessor` работает с экземплярами до и/или после инициализации; может изменить объект или вернуть прокси. Порядок важен, потому что метаданные должны быть подготовлены до создания bean, а постобработка экземпляра происходит в рамках его жизненного цикла. Это инфраструктурный механизм; прикладному коду обычно не требуется реализовывать его без конкретной необходимости.
+
+## Практика. Глобальный 404 handler
+
+```java
+@RestControllerAdvice
+public class ApiExceptionHandler {
+    @ExceptionHandler(StudentNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleNotFound(
+            StudentNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(Map.of("error", "student_not_found"));
+    }
+}
+```
+
+`@RestControllerAdvice` позволяет централизованно обрабатывать исключения контроллеров и возвращать JSON. `@ExceptionHandler` выбирает тип исключения, а ResponseEntity задаёт статус и тело. Не нужно в каждом контроллере повторять одинаковую обработку 404. Импорты: `Map`, `HttpStatus`, `ResponseEntity`, `RestControllerAdvice`, `ExceptionHandler`.
