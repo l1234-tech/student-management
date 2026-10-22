@@ -1,0 +1,45 @@
+# Рубежка №1 — решение билета 8
+
+Материалы: [лекции](../../../lectures/README.md), [лабораторная №1](../../../1-2%20lab/DEFENSE_LAB1.md).
+
+## Теория 1. Function Declaration, Expression и arrow function
+
+**Function Declaration** объявляет именованную функцию через `function name() {}`. Объявление функции доступно до места в коде, где оно написано, в рамках соответствующей области видимости.
+
+**Function Expression** создаёт функцию как выражение и обычно присваивает её переменной: `const fn = function () {}`. Само присваивание выполняется в обычном порядке выполнения; до инициализации `const`/ `let` действует temporal dead zone.
+
+**Arrow function** записывается как `() => {}`. Она не создаёт собственный `this`, а захватывает `this` из внешней области; также у неё нет собственного `arguments` и она не используется как обычный конструктор через `new`. У стрелочной функции нет отдельного динамического `this`, что удобно для callback.
+
+```js
+function declaration() {}
+const expression = function () {};
+const arrow = () => {};
+```
+
+Нельзя упрощать hoisting до фразы «всё поднимается одинаково»: объявления, переменные и инициализация ведут себя по-разному.
+
+## Теория 2. Same-Origin Policy
+
+Origin состоит из схемы, хоста и порта. Например, `https://example.com:443` и `http://example.com` — разные origin из-за схемы; `https://example.com` и `https://example.com:8443` — из-за порта.
+
+Same-Origin Policy ограничивает чтение DOM и данных другого origin. Иначе вредоносная страница могла бы читать данные открытой вкладки другого сайта. Сервер может разрешить некоторые взаимодействия через CORS, но браузер не предоставляет произвольный доступ к DOM чужой страницы. Разные приложения на одном компьютере тоже остаются разными origin, если различаются схема, хост или порт.
+
+## Практика. Добавление ФИО в список без innerHTML
+
+```js
+const addButton = document.querySelector("#add");
+const nameInput = document.querySelector("#student-name");
+const list = document.querySelector("#students");
+
+addButton.addEventListener("click", () => {
+  const fullName = nameInput.value.trim();
+  if (fullName === "") return;
+
+  const item = document.createElement("li");
+  item.textContent = fullName;
+  list.append(item);
+  nameInput.value = "";
+});
+```
+
+`trim()` убирает пробелы по краям, поэтому строка из пробелов считается пустой. `createElement` создаёт элемент списка, `textContent` вставляет пользовательский ввод как текст, а `append` добавляет его в DOM. Использование `innerHTML` для пользовательского текста может интерпретировать ввод как разметку и создать XSS-риск.
