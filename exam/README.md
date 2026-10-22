@@ -13,6 +13,7 @@
 - [Лабораторная №4 — Framework + RxJS](labs/lab-4-framework-frontend.md)
 - [Практические задачи](practice/README.md)
 - [Билеты](tickets/README.md)
+- [Рубежка №1 — 30 билетов: 2 теоретических + 1 практическое](tickets/rubezhka-1/README.md)
 - [Решения билетов](solutions/README.md)
 - [Карточки](flashcards.md)
 - [Чек-лист](checklist.md)
