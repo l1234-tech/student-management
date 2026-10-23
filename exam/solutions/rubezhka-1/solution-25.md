@@ -1,5 +1,19 @@
 # Рубежка №1 — решение билета 25
 
+## Условия из исходного PDF «Рубежка №1.pdf»
+
+### Теоретический вопрос 49
+> Почему Spring Security выполняет проверку пользователя до входа в Spring MVC-контроллер? Объясните роль SecurityFilterChain, AuthenticationManager и SecurityContext.
+
+### Теоретический вопрос 50
+> Почему хранить пароли в открытом виде или в виде простого SHA-256 небезопасно? Объясните назначение случайной соли и медленных алгоритмов BCrypt/Argon2id.
+
+### Практическое задание 25
+> На Java/Spring Security напишите SecurityFilterChain для REST API: GET /students/** разрешён ролям USER и ADMIN; изменение /students/** разрешено только ADMIN; остальные запросы требуют аутентификацию. Клиенты передают JWT в Authorization; настройте сессии и CSRF соответственно.
+
+---
+
+
 Материалы: [лекции](../../../lectures/README.md), [лабораторная №3](../../../3%20lab/DEFENSE.md).
 
 ## Теория 1. Spring Security filter chain
