@@ -23,7 +23,9 @@ flowchart LR
 | --- | --- | --- |
 | Лабораторная 1 | HTML/CSS/JS, CRUD, cookies, валидация | Реализация в `1-2 lab/` |
 | Лабораторная 2 | Django + DRF, REST API, JSON-хранилище | Реализация в `1-2 lab/` |
-| Лабораторная 3 | Spring Boot + EclipseLink/JPA + PostgreSQL, JWT и роли | Реализация и тесты в `3 lab/` |\n| Лабораторная 4 | Vue 3 + Vue Router + Pinia + RxJS, JWT и Docker Compose | Реализация в `4 lab/` |\n| Лабораторная 5 | Nuxt: SSR, динамические маршруты, middleware и кеширование | Подготовлены ТЗ и ответы; реализация ещё не добавлена |
+| Лабораторная 3 | Spring Boot + EclipseLink/JPA + PostgreSQL, JWT и роли | Реализация и тесты в `3 lab/` |
+| Лабораторная 4 | Vue 3 + Vue Router + Pinia + RxJS, JWT и Docker Compose | Реализация в `4 lab/` |
+| Лабораторная 5 | Nuxt: SSR, динамические маршруты, middleware и кеширование | Подготовлены ТЗ и ответы; реализация ещё не добавлена |
 
 ## 📝 Рубежка №1
 
@@ -35,7 +37,9 @@ flowchart LR
 
 - **[Лабораторная №1 — Frontend: HTML, CSS, JavaScript, DOM, формы, cookies и CRUD](1-2%20lab/DEFENSE_LAB1.md)**
 - **[Лабораторная №2 — Backend: Python, Django REST Framework, REST API, валидация, HTTP и stateless](1-2%20lab/DEFENSE_LAB2.md)**
-- **[Лабораторная №3 — Java Backend: Spring Boot, JPA/PostgreSQL, JWT, авторизация и роли](3%20lab/DEFENSE.md)**\n- **[Лабораторная №4 — Vue Frontend: компоненты, Pinia, RxJS, JWT и Docker](exam/solutions/lab-4.md)**\n- **[Лабораторная №5 — Nuxt: SSR, маршрутизация, middleware и кеширование](exam/solutions/lab-5.md)**
+- **[Лабораторная №3 — Java Backend: Spring Boot, JPA/PostgreSQL, JWT, авторизация и роли](3%20lab/DEFENSE.md)**
+- **[Лабораторная №4 — Vue Frontend: компоненты, Pinia, RxJS, JWT и Docker](exam/solutions/lab-4.md)**
+- **[Лабораторная №5 — Nuxt: SSR, маршрутизация, middleware и кеширование](exam/solutions/lab-5.md)**
 
 **Приоритет подготовки к лабораторной №3:** сначала разберите полный поток `запрос → JWT-фильтр → проверка роли → контроллер → сервис → репозиторий/JPA → PostgreSQL → JSON-ответ`, затем пройдите 16 вопросов конспекта и сценарий демонстрации. В лабораторной №3 уже есть отдельный большой `DEFENSE.md`; он сохранён, не заменён кратким пересказом.
 
