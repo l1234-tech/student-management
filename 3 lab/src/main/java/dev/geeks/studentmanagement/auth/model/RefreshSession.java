@@ -3,6 +3,7 @@
 package dev.geeks.studentmanagement.auth.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -16,7 +17,8 @@ public class RefreshSession {
   @Column(nullable = false)
   private String username;
 
-  @Column(nullable = false)
+  @Convert(converter = InstantTimestampConverter.class)
+  @Column(nullable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
   private Instant expiresAt;
 
   @Column(name = "revoked_at")

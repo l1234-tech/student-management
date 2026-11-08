@@ -1,0 +1,130 @@
+/* Адаптивное оформление страниц, форм, таблиц и состояний интерфейса. */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font: 16px/1.5 system-ui, sans-serif;
+  color: #29364d;
+  background: #f4f6fb;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+header,
+main {
+  max-width: 1180px;
+  margin: auto;
+  padding: 1.2rem;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+a {
+  color: #5549a4;
+}
+
+button,
+input,
+select,
+textarea {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid #cbd1e2;
+  border-radius: 0.4rem;
+  font: inherit;
+}
+
+button {
+  margin: 0.2rem;
+  background: #eeecff;
+  color: #393273;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+:focus-visible {
+  outline: 3px solid #8980dc;
+  outline-offset: 2px;
+}
+
+section,
+fieldset {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #dce1ed;
+  border-radius: 0.7rem;
+  background: #fff;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin: 0.5rem 0;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.5rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+td,
+th {
+  padding: 0.6rem;
+  border-bottom: 1px solid #e1e5ef;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+th button {
+  border: 0;
+  background: transparent;
+  text-decoration: underline;
+}
+
+[role="alert"] {
+  color: #a32945;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 0.5rem;
+}
+
+dd {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  dl {
+    grid-template-columns: 1fr;
+  }
+
+  dd {
+    margin-bottom: 0.5rem;
+  }
+}

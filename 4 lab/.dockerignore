@@ -1,0 +1,12 @@
+# Назначение: контекст frontend-сборки; вход файлы 4 lab, выход отфильтрованный Docker context.
+# TODO: Добавляя артефакты проверки, исключать их здесь; src/package-lock/nginx.conf не исключать.
+# Связано с Dockerfile; Dockerfile.backend использует другой контекст (корень репозитория).
+# API/USER/ADMIN/DTO здесь не обрабатываются; .env с DB_PASSWORD не отправлять в frontend image.
+# Проверка: docker compose build frontend проходит; зависимости устанавливает npm ci внутри build-stage.
+node_modules
+.npm-cache
+dist
+.env
+.env.*
+!.env.example
+*.log

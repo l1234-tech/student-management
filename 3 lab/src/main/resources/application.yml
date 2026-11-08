@@ -15,7 +15,7 @@ spring:
     properties:
       eclipselink:
         weaving: false
-        ddl-generation: create-or-extend-tables
+        ddl-generation: ${DB_DDL_GENERATION:none}
         ddl-generation.output-mode: database
   jackson:
     deserialization:

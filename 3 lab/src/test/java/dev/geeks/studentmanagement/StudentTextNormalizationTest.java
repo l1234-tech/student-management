@@ -1,37 +1,55 @@
 package dev.geeks.studentmanagement;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import dev.geeks.studentmanagement.student.dto.*;
+import dev.geeks.studentmanagement.student.dto.StudentCreateRequest;
+import dev.geeks.studentmanagement.student.dto.StudentSearchRequest;
+import dev.geeks.studentmanagement.student.dto.StudentUpdateRequest;
 import org.junit.jupiter.api.Test;
 
 class StudentTextNormalizationTest {
   @Test
   void trimsCreationFieldsButKeepsSpacesBetweenWords() {
-    var r =
+    var request =
         new StudentCreateRequest(
-            123456, "  Маша Иванова  ", "  P1234  ", 5, 1234, " 2020-09-01 ", false, "  заметка  ");
-    assertEquals("Маша Иванова", r.name());
-    assertEquals("P1234", r.group());
-    assertEquals("2020-09-01", r.checkinDate());
-    assertEquals("заметка", r.note());
+            123456,
+            "  Маша Иванова  ",
+            "  P1234  ",
+            5,
+            1234,
+            " 2020-09-01 ",
+            false,
+            "  заметка  ");
+
+    assertEquals("Маша Иванова", request.name());
+    assertEquals("P1234", request.group());
+    assertEquals("2020-09-01", request.checkinDate());
+    assertEquals("заметка", request.note());
   }
 
   @Test
   void patchKeepsMissingFieldsAndTrimsProvidedValues() {
-    var r = new StudentUpdateRequest(null, "  P1234  ", null, null, null, null, "   ");
-    assertNull(r.name());
-    assertNull(r.checkinDate());
-    assertEquals("P1234", r.group());
-    assertEquals("", r.note());
+    var request =
+        new StudentUpdateRequest(null, "  P1234  ", null, null, null, null, "   ");
+
+    assertNull(request.name());
+    assertNull(request.checkinDate());
+    assertEquals("P1234", request.group());
+    assertEquals("", request.note());
   }
 
   @Test
   void whitespaceOnlySearchIsAnEmptyCriterionNotAnAbsentOne() {
-    var r = new StudentSearchRequest(null, "   ", "\t ", null, null, null, null, null, null);
-    assertEquals("", r.name());
-    assertEquals("", r.group());
-    var empty = new StudentSearchRequest(null, null, null, null, null, null, null, null, null);
+    var request =
+        new StudentSearchRequest(
+            null, "   ", "\t ", null, null, null, null, null, null, null, null);
+    var empty =
+        new StudentSearchRequest(
+            null, null, null, null, null, null, null, null, null, null, null);
+
+    assertEquals("", request.name());
+    assertEquals("", request.group());
     assertNull(empty.name());
     assertNull(empty.group());
   }

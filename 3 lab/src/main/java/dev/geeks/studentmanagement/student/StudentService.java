@@ -1,6 +1,4 @@
-// бизнес логика студентов
-// сервис получает студентов из базы , проверяет данные и изменяет записи
-// удаляет их  и выполняет поиск , сортировку и пагинацию
+// Бизнес-логика студентов: CRUD, фильтрация, сортировка и пагинация через JPA.
 
 package dev.geeks.studentmanagement.student;
 
@@ -63,6 +61,14 @@ public class StudentService {
 
           if (request.isForeign() != null)
             predicates.add(cb.equal(root.get("isForeign"), request.isForeign()));
+          if (request.checkinDate() != null && !request.checkinDate().isBlank()) {
+            try {
+              predicates.add(cb.equal(root.get("checkinDate"), LocalDate.parse(request.checkinDate())));
+            } catch (java.time.format.DateTimeParseException exception) {
+              throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "checkin_date должен иметь формат YYYY-MM-DD");
+            }
+          }
+          if (request.note() != null) predicates.add(cb.equal(root.get("note"), request.note()));
 
           return cb.and(predicates.toArray(Predicate[]::new));
         };

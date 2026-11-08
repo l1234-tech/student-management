@@ -1,0 +1,12 @@
+# Назначение: исключить локальные зависимости/сборку/секреты 4 lab из Git.
+# TODO: При добавлении генераторов исключать только их вывод; исходники и package-lock.json сохранять.
+# Вход — пути Git, выход — игнорирование. Связано с npm/Vite и .env.example.
+# API/роли/DTO здесь не применяются; DB_PASSWORD/ADMIN_PASSWORD из .env не коммитить.
+# Проверка: git status показывает исходники, но не node_modules/dist/.env.
+node_modules/
+.npm-cache/
+dist/
+.env
+.env.*
+!.env.example
+*.log

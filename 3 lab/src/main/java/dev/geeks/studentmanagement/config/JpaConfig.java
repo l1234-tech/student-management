@@ -26,8 +26,7 @@ public class JpaConfig {
 
   public JpaConfig(
       @Value("${spring.jpa.properties.eclipselink.weaving:false}") String weaving,
-      @Value("${spring.jpa.properties.eclipselink.ddl-generation:create-or-extend-tables}")
-          String ddlGeneration,
+      @Value("${spring.jpa.properties.eclipselink.ddl-generation:none}") String ddlGeneration,
       @Value("${spring.jpa.properties.eclipselink.ddl-generation.output-mode:database}")
           String ddlOutputMode) {
     this.weaving = weaving;
@@ -38,14 +37,6 @@ public class JpaConfig {
   @Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource)
       throws SQLException {
-    try (var connection = dataSource.getConnection()) {
-      if ("PostgreSQL".equals(connection.getMetaData().getDatabaseProductName())) {
-        try (var statement = connection.createStatement()) {
-          statement.execute("ALTER TABLE IF EXISTS students ALTER COLUMN note TYPE VARCHAR(2000)");
-        }
-      }
-    }
-
     var factory = new LocalContainerEntityManagerFactoryBean();
     factory.setDataSource(dataSource);
     factory.setPackagesToScan("dev.geeks.studentmanagement");

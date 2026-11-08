@@ -1,0 +1,18 @@
+# Назначение: собрать ПОВТОРНО используемый backend 3 lab; контекст — корень репозитория.
+# Вход pom.xml/src оригинального backend, выход Java 17 jar; код в 4 lab не копируется.
+# TODO: После реализации frontend прогнать тесты backend отдельно; здесь -DskipTests только для упаковки.
+# API /api/auth/*, /api/user/students USER/ADMIN, /api/admin/students ADMIN; DTO не меняются.
+# Взаимодействует с compose.yaml: DB_* и ADMIN_* передаются в runtime, не в образ.
+# Проверка: docker compose build backend; логи старта, запрос /api/auth/me без токена даёт 401.
+FROM maven:3.9-eclipse-temurin-17 AS build
+WORKDIR /build
+COPY ["3 lab/pom.xml", "./pom.xml"]
+COPY ["3 lab/src", "./src"]
+RUN mvn -B -DskipTests package
+
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /build/target/student-management-0.0.1-SNAPSHOT.jar app.jar
+# TODO: /app/data хранит автоматически созданные ключи JWT; volume в Compose сохраняет их при рестарте.
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]

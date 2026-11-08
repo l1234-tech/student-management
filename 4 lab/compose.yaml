@@ -1,0 +1,55 @@
+# Назначение: изолированный учебный стенд frontend + оригинальный 3 lab + новый PostgreSQL.
+# Вход .env, Dockerfile/Dockerfile.backend; выход http://localhost:8084 (или FRONTEND_PORT).
+# TODO: До первого запуска задать DB_PASSWORD, при необходимости ADMIN_*; не использовать общую БД.
+# Backend: DB_DDL_GENERATION=create-or-extend-tables только для этой новой учебной базы.
+# JWT-ключи генерирует backend в /app/data; volume сохраняет их между рестартами.
+# API auth открыто, /user/students USER/ADMIN, /admin/students ADMIN; браузер обращается через Nginx.
+# TODO: После реализации проверить USER/ADMIN, refresh/logout, offline и сохранность данных после restart.
+# depends_on backend означает порядок старта, не готовность HTTP; при старте дождаться логов backend.
+# TODO: Если понадобится автоматическая готовность, добавить реальную healthcheck; /actuator/health отсутствует.
+# Проверка: docker compose config, up --build; /api/auth/me -> 401; прямой SPA URL -> 200.
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${FRONTEND_PORT:-8084}:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ..
+      dockerfile: 4 lab/Dockerfile.backend
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/student_management
+      DB_USERNAME: lab4
+      DB_PASSWORD: ${DB_PASSWORD:?Заполните DB_PASSWORD в .env}
+      DB_DDL_GENERATION: create-or-extend-tables
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+    volumes:
+      - jwt-keys:/app/data
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: student_management
+      POSTGRES_USER: lab4
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Заполните DB_PASSWORD в .env}
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lab4 -d student_management"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  postgres-data:
+  jwt-keys:

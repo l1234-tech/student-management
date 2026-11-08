@@ -24,7 +24,9 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
       "spring.datasource.username=${LAB_TEST_DB_USER:sa}",
       "spring.datasource.password=${LAB_TEST_DB_PASSWORD:}",
       "app.admin.username=testadmin",
-      "app.admin.email=admin@test.local"
+      "app.admin.email=admin@test.local",
+      "spring.jpa.properties.eclipselink.ddl-generation=create-or-extend-tables",
+      "app.auth.refresh-cleanup-cron=-"
     })
 @org.springframework.test.context.TestExecutionListeners(
     listeners =
@@ -52,6 +54,7 @@ class ApiIntegrationTest {
   @Autowired JwtService jwt;
   @Autowired RefreshSessionRepository sessions;
   @Autowired AuthService authService;
+  @Autowired org.springframework.jdbc.core.JdbcTemplate jdbc;
   private String access;
 
   private JsonNode send(MockHttpServletRequestBuilder r, int status) throws Exception {
@@ -93,6 +96,31 @@ class ApiIntegrationTest {
     access = registered.get("accessToken").asText();
     String refresh = registered.get("refreshToken").asText();
     assertTrue(users.findByUsername("newuser").orElseThrow().getPasswordHash().startsWith("$2"));
+    assertEquals(
+        dev.geeks.studentmanagement.auth.model.Role.USER,
+        users.findByUsername("newuser").orElseThrow().getRole());
+    assertEquals(
+        "USER",
+        jdbc.queryForObject("SELECT role FROM app_users WHERE username = 'newuser'", String.class));
+    assertEquals(
+        "ADMIN",
+        jdbc.queryForObject(
+            "SELECT role FROM app_users WHERE username = 'testadmin'", String.class));
+    assertEquals(
+        "TIMESTAMP WITH TIME ZONE",
+        jdbc.queryForObject(
+            "SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'REFRESH_SESSIONS' AND COLUMN_NAME = 'EXPIRESAT'",
+            String.class));
+    // JWT is valid, but its persisted session has expired: refresh must still fail.
+    var expiredId = java.util.UUID.randomUUID().toString();
+    sessions.saveAndFlush(new RefreshSession(expiredId, "newuser", Instant.now().minusSeconds(60)));
+    var validJwt =
+        jwt.generateRefreshToken(
+            users.findByUsername("newuser").orElseThrow(),
+            expiredId,
+            Instant.now().plusSeconds(600));
+    send(post("/api/auth/refresh").content("{\"refreshToken\":\"" + validJwt + "\"}"), 401);
+    sessions.deleteById(expiredId);
     send(
         post("/api/auth/register")
             .content(
