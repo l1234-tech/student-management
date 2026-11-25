@@ -255,7 +255,53 @@ function editStudent(isuId) {
 </template>
 ~~~
 
-Toolbar получает текущий groupFilter как prop и отправляет change-group; родительская функция setGroup меняет его. StudentList перебирает массив, передавая по одной записи в StudentCard. Card получает student и при клике генерирует edit с student.isuId. Родительский editStudent принимает id и открывает форму. Так родитель хранит общее состояние, дети только отображают и сообщают события. В лекции 9 это контракт props/callbacks/events.
+~~~vue
+<!-- StudentToolbar.vue -->
+<script setup>
+defineProps({ group: String });
+defineEmits(["change-group"]);
+</script>
+<template>
+  <select :value="group" @change="$emit('change-group', $event.target.value)">
+    <option value="">Все группы</option>
+    <option value="M3201">M3201</option>
+    <option value="M3202">M3202</option>
+  </select>
+</template>
+~~~
+
+~~~vue
+<!-- StudentList.vue -->
+<script setup>
+defineProps({ students: { type: Array, default: () => [] } });
+defineEmits(["edit"]);
+</script>
+<template>
+  <StudentCard
+    v-for="student in students"
+    :key="student.isuId"
+    :student="student"
+    @edit="$emit('edit', $event)"
+  />
+</template>
+~~~
+
+~~~vue
+<!-- StudentCard.vue -->
+<script setup>
+defineProps({ student: { type: Object, required: true } });
+defineEmits(["edit"]);
+</script>
+<template>
+  <article>
+    <h2>{{ student.name }}</h2>
+    <p>{{ student.group }}</p>
+    <button @click="$emit('edit', student.isuId)">Редактировать</button>
+  </article>
+</template>
+~~~
+
+StudentPage владеет общими данными и groupFilter. StudentToolbar получает группу через prop, а событие change-group несёт выбранное значение; setGroup обновляет состояние родителя. StudentList получает массив, создаёт карточку для каждой записи и использует isuId как стабильный key. StudentCard показывает одного студента, а событие edit передаёт вверх его isuId; List пробрасывает это событие родителю, где editStudent открывает форму редактирования. В цепочке данные идут вниз через props, события — вверх. Это контракт компонентов из лекции 9.
 
 ### 66. Дочерний ввод имени и событие сохранения родителю
 
