@@ -13,7 +13,7 @@
 | [Рубежка №2](docs/exam/solutions/rubezhka-2/README.md) | Ответы и статус подготовки |
 | [Лекции](lectures/README.md) | Презентации, PDF и текстовые конспекты |
 | [Технические задания](docs/lab-specs/README.md) | Оригинальные PDF заданий лабораторных 1–6 |
-| [Ответы к защите](docs/lab-defense-answers/) | Теоретические ответы по лабораторным 4–5 |
+| [Ответы к защите](docs/lab-defense-answers/README.md) | Теоретические ответы по лабораторным 1–6 |
 | [Описание лабораторных 1–2](docs/labs-1-2.md) | История проекта и различия двух этапов |
 | [Исходное описание проекта](docs/source-readme.md) | Сохранённое описание исходного командного проекта |
 
@@ -23,12 +23,12 @@
 
 | Работа | Реализация / статус | Задание и подготовка |
 | --- | --- | --- |
-| №1 — Frontend без фреймворков | [Код и README](1-2%20lab/README.md) | [Оригинальное ТЗ](docs/lab-specs/originals/Лабораторная%201.pdf) · [Подготовка к защите](1-2%20lab/DEFENSE_LAB1.md) |
-| №2 — Django REST API | [Код и README](1-2%20lab/README.md) | [Оригинальное ТЗ](docs/lab-specs/originals/Лаб%202.pdf) · [Подготовка к защите](1-2%20lab/DEFENSE_LAB2.md) |
-| №3 — Java, Spring Boot, JPA и PostgreSQL | [Код и README](3%20lab/README.md) | [Оригинальное ТЗ](docs/lab-specs/originals/Лабораторная%203.pdf) · [Подготовка к защите](3%20lab/DEFENSE.md) |
+| №1 — Frontend без фреймворков | [Код и README](1-2%20lab/README.md) | [Оригинальное ТЗ](docs/lab-specs/originals/Лабораторная%201.pdf) · [Подготовка к защите](docs/lab-defense-answers/lab-1.md) |
+| №2 — Django REST API | [Код и README](1-2%20lab/README.md) | [Оригинальное ТЗ](docs/lab-specs/originals/Лаб%202.pdf) · [Подготовка к защите](docs/lab-defense-answers/lab-2.md) |
+| №3 — Java, Spring Boot, JPA и PostgreSQL | [Код и README](3%20lab/README.md) | [Оригинальное ТЗ](docs/lab-specs/originals/Лабораторная%203.pdf) · [Подготовка к защите](docs/lab-defense-answers/lab-3.md) |
 | №4 — Vue 3, Pinia, RxJS и Docker | [Код и README](4%20lab/README.md) | [Оригинальное ТЗ](docs/lab-specs/originals/Лабораторная%204.pdf) · [Ответы к защите](docs/lab-defense-answers/lab-4.md) |
 | №5 — Nuxt и SSR | [README и статус](5%20lab/README.md) | [Оригинальное ТЗ](docs/lab-specs/originals/Лабораторная%205.pdf) · [Ответы к защите](docs/lab-defense-answers/lab-5.md) |
-| №6 | Реализация в этом репозитории пока не описана | [Оригинальное ТЗ](docs/lab-specs/originals/Лабораторная%206.pdf) |
+| №6 | Реализация в этом репозитории пока не описана | [Оригинальное ТЗ](docs/lab-specs/originals/Лабораторная%206.pdf) · [Ответы к защите](docs/lab-defense-answers/lab-6.md) |
 
 ### Что важно знать о статусе
 
@@ -47,10 +47,13 @@
 
 ### Теория и защита лабораторных
 
-- [Ответы к защите лабораторной №4](docs/lab-defense-answers/lab-4.md).
-- [Ответы к защите лабораторной №5](docs/lab-defense-answers/lab-5.md).
-- [Подробные материалы к защите лабораторных №1–2](1-2%20lab/README.md) — также доступны отдельные конспекты: [№1](1-2%20lab/DEFENSE_LAB1.md), [№2](1-2%20lab/DEFENSE_LAB2.md).
-- [Подробный конспект к защите лабораторной №3](3%20lab/DEFENSE.md).
+- [Лабораторная №1](docs/lab-defense-answers/lab-1.md).
+- [Лабораторная №2](docs/lab-defense-answers/lab-2.md).
+- [Лабораторная №3](docs/lab-defense-answers/lab-3.md).
+- [Лабораторная №4](docs/lab-defense-answers/lab-4.md).
+- [Лабораторная №5](docs/lab-defense-answers/lab-5.md).
+- [Лабораторная №6](docs/lab-defense-answers/lab-6.md).
+- [Навигация по ответам к защите](docs/lab-defense-answers/README.md).
 
 ### Лекции и технические задания
 

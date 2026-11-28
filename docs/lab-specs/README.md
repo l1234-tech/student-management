@@ -6,12 +6,12 @@
 
 | Работа | Тема | Реализация | Материалы к защите |
 | --- | --- | --- | --- |
-| №1 | Frontend без фреймворков | [Каталог лабораторных 1–2](../../1-2%20lab/README.md) | [Конспект №1](../../1-2%20lab/DEFENSE_LAB1.md) |
-| №2 | Python Backend и REST API | [Каталог лабораторных 1–2](../../1-2%20lab/README.md) | [Конспект №2](../../1-2%20lab/DEFENSE_LAB2.md) |
-| №3 | Java Backend с авторизацией | [Лабораторная 3](../../3%20lab/README.md) | [Конспект защиты](../../3%20lab/DEFENSE.md) |
+| №1 | Frontend без фреймворков | [Каталог лабораторных 1–2](../../1-2%20lab/README.md) | [Конспект №1](../lab-defense-answers/lab-1.md) |
+| №2 | Python Backend и REST API | [Каталог лабораторных 1–2](../../1-2%20lab/README.md) | [Конспект №2](../lab-defense-answers/lab-2.md) |
+| №3 | Java Backend с авторизацией | [Лабораторная 3](../../3%20lab/README.md) | [Конспект защиты](../lab-defense-answers/lab-3.md) |
 | №4 | Frontend на Vue | [Лабораторная 4](../../4%20lab/README.md) | [Ответы к защите](../lab-defense-answers/lab-4.md) |
 | №5 | Метафреймворк Nuxt | [Лабораторная 5](../../5%20lab/README.md) | [Ответы к защите](../lab-defense-answers/lab-5.md) |
-| №6 | Оригинальное задание | — | — |
+| №6 | Оригинальное задание | — | [Ответы к защите](../lab-defense-answers/lab-6.md) |
 
 ## Оригинальные PDF
 
@@ -25,3 +25,12 @@
 | [Лабораторная 6.pdf](originals/Лабораторная%206.pdf) | №6 |
 
 PDF сохраняют исходные формулировки требований, а Markdown-файлы с ответами и README реализаций дают отдельное представление для подготовки. Они не подменяют оригиналы.
+
+## Ответы к защите
+
+- [Лабораторная №1](../lab-defense-answers/lab-1.md)
+- [Лабораторная №2](../lab-defense-answers/lab-2.md)
+- [Лабораторная №3](../lab-defense-answers/lab-3.md)
+- [Лабораторная №4](../lab-defense-answers/lab-4.md)
+- [Лабораторная №5](../lab-defense-answers/lab-5.md)
+- [Лабораторная №6](../lab-defense-answers/lab-6.md)

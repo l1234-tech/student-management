@@ -13,11 +13,12 @@
 
 ## Подготовка к защите лабораторных
 
-- [Лабораторная №1 — frontend без фреймворков](../../1-2%20lab/DEFENSE_LAB1.md).
-- [Лабораторная №2 — Django REST Framework и REST API](../../1-2%20lab/DEFENSE_LAB2.md).
-- [Лабораторная №3 — Spring Boot, JPA, PostgreSQL и JWT](../../3%20lab/DEFENSE.md).
+- [Лабораторная №1 — frontend без фреймворков](../lab-defense-answers/lab-1.md).
+- [Лабораторная №2 — Django REST Framework и REST API](../lab-defense-answers/lab-2.md).
+- [Лабораторная №3 — Spring Boot, JPA, PostgreSQL и JWT](../lab-defense-answers/lab-3.md).
 - [Лабораторная №4 — Vue, Pinia, RxJS и Docker](../lab-defense-answers/lab-4.md).
 - [Лабораторная №5 — Nuxt, SSR и метафреймворки](../lab-defense-answers/lab-5.md).
+- [Лабораторная №6 — Node.js и real-time](../lab-defense-answers/lab-6.md).
 
 ## Как устроены билеты
 
